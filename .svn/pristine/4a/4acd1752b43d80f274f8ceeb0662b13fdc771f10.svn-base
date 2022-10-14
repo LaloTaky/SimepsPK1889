@@ -1,0 +1,18 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body style="height: 100%; width: 100%; position: absolute; margin: 0;">
+    <div style="top: 25%; width: 90%; position: relative; margin: auto;">
+        <div style=" width: fit-content; margin: auto;">
+            <img src="https://lh3.googleusercontent.com/proxy/fh0RtiXODBEbVKvpGX3mLJh1CuW_k6IjuXvFl1V79KJYNrwnsdbJtnjbXqpkiRoV6jxUdyWu-y8nE1HSF0A-HNyg-yFcUSSJbXU6IkA6Ou41SXWOSxk9KWpUrh8Woaw" style=" zoom: 0.8;" />
+        </div>
+        <div style="font-size: 40px; text-align: center; font-weight: bold; font-family: 'Poppins', sans-serif; padding-top: 30px;">
+            ¡Página en mantenimiento!
+            Disculpe las molestias.
+        </div>
+    </div>
+</body>
+</html>

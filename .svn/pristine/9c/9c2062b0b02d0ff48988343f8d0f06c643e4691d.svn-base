@@ -1,0 +1,140 @@
+﻿<%@ Page Language="C#" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="Programas.aspx.cs" Inherits="SIMEPS.Programas" %>
+<asp:Content ID="BodyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server"> 
+    <div class="borderedFrame">  
+        <div id="divContentProgramas" >
+            <table style="padding-left:10px">
+                <tr>
+                    <td>
+                          <div id="divAB" runat="server" onload="Page_Load">
+                            <asp:GridView ID="gvAB" runat="server" AutoGenerateColumns="false" ShowHeader="true" DataSourceID="odsProgramaAB" style="width:100%" AllowPaging="true" PageSize="30" CssClass="tabla">
+                                <columns>                                            
+                                    <asp:boundfield datafield="PP" headertext="PP" itemstyle-width="10%" itemstyle-cssclass="tablaColumnaCenter" headerstyle-cssclass="EncabezadoProgramas" />
+                                    <asp:templatefield itemstyle-width="60%" headertext="Nombre del Programa" itemstyle-cssclass="tablaColumna" headerstyle-cssclass="EncabezadoProgramas">																				
+                                        <itemtemplate>	                                           
+                                            <a id="a2" runat="server" style="color:#1b4093" href='<%#Eval("LIGA") %>' class="LigaPrograma">
+                                                <asp:Label ID="Label21" runat="server" Text='<%#Eval("NOMBRE") %>'></asp:Label>
+                                            </a>
+                                        </itemtemplate>
+                                    </asp:templatefield>
+                                </columns>
+                                <rowstyle cssclass="tablaRenglon" />
+                                <pagerstyle cssclass="PaginacionProgramas"/>
+                                <alternatingrowstyle backcolor="#e1e1e1" />
+                            </asp:GridView>
+
+                            <asp:ObjectDataSource ID="odsProgramaAB" runat="server" TypeName="SIMEPS.Dal.IndicadoresDal" SelectMethod="ConsultarPrograma" >
+                                <selectparameters>
+                                    <asp:querystringparameter name="Anio" querystringfield="ciclo" type="Decimal" defaultvalue="0" />
+                                    <asp:querystringparameter name="Ramo" querystringfield="ramo" defaultvalue="0" />
+                                    <asp:querystringparameter name="Unidad" querystringfield="unidad" defaultvalue="0" />
+                                    <asp:querystringparameter name="palabraClave" defaultvalue="0"/>  
+                                    <asp:querystringparameter name="dMatriz" querystringfield="dMatriz" defaultvalue="-1" />
+                                    <asp:querystringparameter name="dIndicador" querystringfield="sIndicador" defaultvalue="0" />
+                                    <asp:querystringparameter name="sNivel" querystringfield="sNivel" defaultvalue="0" />                        
+                                    <asp:querystringparameter name="sPantalla" querystringfield="t" />                                              
+                                    <asp:Parameter name="universoPaemir" DefaultValue="1" /> 
+                                    <asp:Parameter Name="idIndicadorSectorial" DefaultValue="-1" />                                        
+                                </selectparameters>
+                            </asp:ObjectDataSource>
+                        </div>
+                       
+                        <div id="divProgramas" runat="server" onload="Page_Load">
+                            <asp:GridView ID="grvProgramaC" runat="server" AutoGenerateColumns="false" ShowHeader="true" DataSourceID="odsProgramasC" style="width:100%" AllowPaging="true" PageSize="30" CssClass="tabla">
+                                <columns>                                            
+                                    <asp:boundfield datafield="PP" headertext="PP" itemstyle-width="10%" itemstyle-cssclass="tablaColumnaCenter" headerstyle-cssclass="EncabezadoProgramas" />
+                                    <asp:templatefield itemstyle-width="60%" headertext="Nombre del Programa" itemstyle-cssclass="tablaColumna" headerstyle-cssclass="EncabezadoProgramas">																				
+                                        <itemtemplate>	                                           
+                                            <a id="a2" runat="server" style="color:#1b4093" href='<%#Eval("LIGA") %>' class="LigaPrograma">
+                                                <asp:Label ID="Label2" runat="server" Text='<%#Eval("NOMBRE") %>'></asp:Label>
+                                            </a>
+                                        </itemtemplate>
+                                    </asp:templatefield>
+                                   <asp:Templatefield itemstyle-width="5%" headertext="Proceso Aprobación" itemstyle-cssclass="tablaColumnaCenter" headerstyle-cssclass="EncabezadoProgramas">
+                                      <ItemTemplate>
+                                            <asp:Label ID="Label3" runat="server" Text='<%#Eval("PROCESO_APROBACION") %>'></asp:Label>
+                                      </ItemTemplate>
+                                   </asp:Templatefield>
+
+                                   <asp:Templatefield itemstyle-width="5%" headertext="Año del Dictamen" itemstyle-cssclass="tablaColumnaCenter" headerstyle-cssclass="EncabezadoProgramas">
+                                      <ItemTemplate>
+                                            <asp:Label ID="Label3" runat="server" Text='<%#Eval("CICLO_APROBACION") %>'></asp:Label>
+                                      </ItemTemplate>
+                                   </asp:Templatefield>
+                                   
+                                   <asp:Templatefield itemstyle-width="30%" headertext="Dictamen de Aprobación" itemstyle-cssclass="tablaColumna" headerstyle-cssclass="EncabezadoProgramas">
+                                      <ItemTemplate>
+                                         <a id="zip" runat="server" style="color:#1b4093" visible ='<%#Convert.ToInt16(Eval("ID_NIVEL_APROBACION")) == 3%>' href='<%#Eval("LIGA") %>' 
+                                            onclick='<%#"fjsDetenerEvento(event);descargarZip(this,\""+Eval("CLAVE")+"\",\""+Eval("MODALIDAD")+"\",\""+Eval("ID_NIVEL_APROBACION")+"\");"%>' class="LigaPrograma">
+                                            <asp:Label ID="Label3" runat="server" Text='<%#Eval("DESC_APROBACION_DICTAMEN") %>'></asp:Label>
+                                         </a>
+                                            <asp:Label ID="Label1" runat="server" visible ='<%#Convert.ToInt16(Eval("ID_NIVEL_APROBACION")) != 3%>' Text='<%#Eval("DESC_APROBACION_DICTAMEN") %>'></asp:Label>
+                                      </ItemTemplate>
+                                   </asp:Templatefield>
+
+                                </columns>
+                                <rowstyle cssclass="tablaRenglon" />
+                                <pagerstyle cssclass="PaginacionProgramas"/>
+                                <alternatingrowstyle backcolor="#e1e1e1" />
+                            </asp:GridView>
+                            <asp:ObjectDataSource ID="odsProgramasC" runat="server" TypeName="SIMEPS.Dal.IndicadoresDal" SelectMethod="ConsultarPrograma" >
+                                <selectparameters>
+                                    <asp:querystringparameter name="Anio" querystringfield="ciclo" type="Decimal" defaultvalue="0" />
+                                    <asp:querystringparameter name="Ramo" querystringfield="ramo" defaultvalue="0" />
+                                    <asp:querystringparameter name="Unidad" querystringfield="unidad" defaultvalue="0" />
+                                    <asp:querystringparameter name="palabraClave" defaultvalue="0"/>  
+                                    <asp:querystringparameter name="dMatriz" querystringfield="dMatriz" defaultvalue="-1" />
+                                    <asp:querystringparameter name="dIndicador" querystringfield="sIndicador" defaultvalue="0" />
+                                    <asp:querystringparameter name="sNivel" querystringfield="sNivel" defaultvalue="0" />                        
+                                    <asp:querystringparameter name="sPantalla" querystringfield="t" /> 
+                                    <asp:Parameter Name="universoPaemir" DefaultValue="1" /> 
+                                    <asp:Parameter Name="idIndicadorSectorial" DefaultValue="-1" />                                                                                  
+                                </selectparameters>
+                            </asp:ObjectDataSource>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="infoPrograma">
+                            La información sobre las Matrices de 
+                            Indicadores para Resultados y de los 
+                            indicadores es responsabilidad de las 
+                            dependencias, entidades y los programas 
+                            federales correspondientes. Para mayor 
+                            información sobre los contenidos de la MIR y 
+                            sus indicadores se sugiere solicitarla 
+                            directamente al programa correspondiente.
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>    
+
+   <script>
+      function descargarZip(url, Clave, Modalidad, Nivel) {
+         if (Clave.length == 1)
+            var clave = "00" + Clave;
+         else if (Clave.length > 1 && Clave.length < 3)
+            var clave = "0" + Clave;
+         else
+            var clave = Clave;
+
+         var urlZip = '<%=ConfigurationManager.AppSettings["urlZip"]%>';
+
+         var sUrl = location.toString();
+         var parametroCiclo = fjsRecuperaParametroPae(sUrl, 'ciclo');
+         var parametroRamo = fjsRecuperaParametroPae(sUrl, 'ramo');
+         var parametroT = fjsRecuperaParametroPae(sUrl, 't')
+
+         if (parametroRamo.length == 1)
+            var ramo = "0" + parametroRamo;
+         else
+            var ramo = parametroRamo;
+
+         if (Nivel == "3" && (parametroT == "c" || parametroT == "C"))
+            window.open(urlZip + parametroCiclo + "/Ficha Evolución MIR " + parametroCiclo + ramo + Modalidad + clave + ".zip");
+      }
+   </script>
+
+</asp:Content>

@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="mirDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="TC_PROG_SECTORIALES">
+    <Key>
+      <PropertyRef Name="ID_PROG_SECTORIAL" />
+    </Key>
+    <Property Name="ID_PROG_SECTORIAL" Type="int" Nullable="false" />
+    <Property Name="CLASIFICACION" Type="int" Nullable="false" />
+    <Property Name="NOMBRE" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="URL_ICONO" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'mirDB.dbo.v_TotMir' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="v_TotMir">
+    <Key>
+      <PropertyRef Name="CICLO" />
+    </Key>
+    <Property Name="NO" Type="bigint" />
+    <Property Name="CICLO" Type="smallint" Nullable="false" />
+    <Property Name="RESULTADOS" Type="int" />
+    <Property Name="GESTION" Type="int" />
+    <Property Name="SERVICIO" Type="int" />
+    <Property Name="TOTAL" Type="int" />
+    <Property Name="TotalIndicadores" Type="varchar" MaxLength="54" />
+    <Property Name="TotalClasificados" Type="varchar" MaxLength="98" />
+  </EntityType>
+  <Function Name="spMPAEM_BuscaIndicador_net" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Texto" Type="varchar(max)" Mode="In" />
+    <Parameter Name="Derecho" Type="smallint" Mode="In" />
+  </Function>
+  <Function Name="spMPAEM_Ciclos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Anio" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="spMPAEM_HistoricoIndRep" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pIdIndicador" Type="numeric" Mode="In" />
+  </Function>
+  <Function Name="spMPAEM_ListaIndicadoresDetalle_net" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pIdIndicador" Type="numeric" Mode="In" />
+    <Parameter Name="pNivel" Type="numeric" Mode="In" />
+    <Parameter Name="pIdNivel" Type="numeric" Mode="In" />
+    <Parameter Name="pIdMatriz" Type="numeric" Mode="In" />
+  </Function>
+  <Function Name="spMPAEM_Mosaicos_net" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Anio" Type="numeric" Mode="In" />
+  </Function>
+  <Function Name="spMPAEM_ObjetivosPorNivel_net" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pIdMatriz" Type="numeric" Mode="In" />
+    <Parameter Name="pNivel" Type="numeric" Mode="In" />
+  </Function>
+  <Function Name="spMPAEM_Parametro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Parametro" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="spMPAEM_Presupuestos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Ramo" Type="varchar" Mode="In" />
+    <Parameter Name="Modalidad" Type="char" Mode="In" />
+    <Parameter Name="palabraClave" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spMPAEM_Programas_net" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Anio" Type="numeric" Mode="In" />
+    <Parameter Name="Ramo" Type="varchar" Mode="In" />
+    <Parameter Name="Unidad" Type="varchar" Mode="In" />
+    <Parameter Name="palabraClave" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="pIdMatriz" Type="numeric" Mode="In" />
+  </Function>
+  <Function Name="spMPAEM_SupuestosNivel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pIdMatriz" Type="numeric" Mode="In" />
+    <Parameter Name="pNivel" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spMPAEM_Valoraciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="palabraClave" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Ramo" Type="int" Mode="In" />
+    <Parameter Name="Modalidad" Type="char" Mode="In" />
+  </Function>
+  <Function Name="spMPAEM_VariablesIndicador" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pIdIndicador" Type="numeric" Mode="In" />
+  </Function>
+  <EntityContainer Name="mirDBModelStoreContainer">
+    <EntitySet Name="TC_PROG_SECTORIALES" EntityType="Self.TC_PROG_SECTORIALES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="v_TotMir" EntityType="Self.v_TotMir" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [v_TotMir].[NO] AS [NO], 
+    [v_TotMir].[CICLO] AS [CICLO], 
+    [v_TotMir].[RESULTADOS] AS [RESULTADOS], 
+    [v_TotMir].[GESTION] AS [GESTION], 
+    [v_TotMir].[SERVICIO] AS [SERVICIO], 
+    [v_TotMir].[TOTAL] AS [TOTAL], 
+    [v_TotMir].[TotalIndicadores] AS [TotalIndicadores], 
+    [v_TotMir].[TotalClasificados] AS [TotalClasificados]
+    FROM [dbo].[v_TotMir] AS [v_TotMir]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

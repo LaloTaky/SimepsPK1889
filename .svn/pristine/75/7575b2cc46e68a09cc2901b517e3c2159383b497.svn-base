@@ -1,0 +1,135 @@
+﻿<%@ Page Title="SIMEPS - Sistema de Medición de la Política Social" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="MosaicoSips.aspx.cs" Inherits="SIMEPS.Mosaico" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+   <div class="borderedFrame">
+
+      <h2 class="PlecaEncabezado">
+         <span id="headerContent">
+            <asp:Label ID="lblTitulo" runat="server"></asp:Label>&#8203;&#8203;&#8203;</span>
+      </h2>
+
+      <br />
+      <div class="textoMosaico">
+         <div>
+            <span class="textoMosaico">
+               <asp:Label ID="lblCuerpo1" runat="server"></asp:Label>
+               <asp:Label ID="lblCuerpo1Cursiva" runat="server"></asp:Label>
+               <asp:Label ID="lblCuerpo1Continuacion" runat="server"></asp:Label>
+            </span>
+            <span style="line-height: 15.33px; font-family: arial, sans-serif; font-size: 10pt; background-color: transparent;"><asp:Label runat="server" ID="lblMIRSiglas">&nbsp;(MIR).&#8203;&#8203;</asp:Label></span><br />
+         </div>
+         <div>
+            <span>&#8203;<br />
+            </span>
+         </div>
+
+         <p class="MsoNormal">
+            <span>
+               <asp:Label ID="lblCuerpo2" runat="server"></asp:Label></span>
+            <br />
+            <br />
+            <span>
+               <asp:Label ID="lblCuerpo3" runat="server"></asp:Label></span>
+         </p>
+
+
+         <div id="dContenido" runat="server">
+
+            <h2 style="color: #00a94f; line-height: 18px; font-family: arial; font-size: 10pt; text-align: justify;">
+               <span>
+                  <asp:Label ID="lblPregunta" runat="server"></asp:Label></span>
+            </h2>
+
+            <br />
+            <p style="text-indent: -18pt; padding-left: 39px;">
+               <span class="bulletsMosaico">·<span>&nbsp;&nbsp;&nbsp;</span></span><span><asp:Label ID="lblRespuesta1" runat="server"></asp:Label></span>
+            </p>
+
+            <p style="text-indent: -18pt; padding-left: 39px;">
+               <span class="bulletsMosaico">·<span>&nbsp;&nbsp;&nbsp;</span></span>
+               <span>
+                  <asp:Label ID="lblRespuesta2" runat="server"></asp:Label></span>
+            </p>
+
+            <p style="text-indent: -18pt; padding-left: 39px;">
+               <span class="bulletsMosaico">·<span style="line-height: normal;">&nbsp;&nbsp;&nbsp;</span></span><span><asp:Label ID="lblRespuesta3" runat="server"></asp:Label></span>
+            </p>
+
+            <p id="pCuerpo" runat="server">
+               <span>
+                  <asp:Label ID="lblCuerpo4" runat="server"></asp:Label>
+               </span>
+               <span class="apple-converted-space">
+                  <span style="color: #262626; line-height: 115%; font-size: 10pt;">&nbsp;</span>
+               </span>
+               <span>
+                  <asp:Label ID="lblCuerpo5" runat="server"></asp:Label>
+               </span>
+               <span class="apple-converted-space">
+                  <span style="color: #262626; line-height: 115%; font-size: 10pt;">&nbsp;</span>
+               </span>
+               <span>
+                  <asp:Label ID="lblCuerpo6" runat="server"></asp:Label></span>
+            </p>
+
+            <p>
+               <span>
+                  <asp:Label ID="lblCuerpo7" runat="server"></asp:Label></span>
+            </p>
+
+            <p>
+               <span>
+                  <asp:Label ID="lblCuerpo8" runat="server"></asp:Label></span>
+               <span style="line-height: 1.231; background-color: transparent;">&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;</span>
+               <span style="line-height: 1.231; background-color: transparent;">&#8203;&#8203;&#8203;&#8203;&#8203;</span>
+            </p>
+         </div>
+      </div>
+
+      <br />
+      <div id="ciclos" runat="server">
+         <span class="textoMosaico" runat="server" id="spnCiclo">Seleccione el año que desea consultar: </span>
+         <asp:DropDownList ID="ddlCiclos" runat="server" DataSourceID="odsCiclos" DataTextField="CICLO_VALUE" DataValueField="CICLO_ID" Width="200px" CssClass="textoMosaico" AutoPostBack="true" OnDataBound="ddlCiclosDataBound">
+         </asp:DropDownList>
+         <asp:ObjectDataSource ID="odsCiclos" runat="server" TypeName="SIMEPS.Dal.IndicadoresDal" SelectMethod="ConsultarCiclos">
+            <selectparameters>
+               <asp:querystringparameter name="sPantalla" querystringfield="t" DefaultValue="A"/>
+            </selectparameters>
+         </asp:ObjectDataSource>
+      </div>
+
+      <asp:UpdatePanel ID="upnMosaicos" runat="server">
+         <ContentTemplate>
+            <br />
+            <table class="tablaMosaico">
+               <asp:Repeater ID="rprMosaicos" runat="server" DataSourceID="odsMosaicos">
+                  <ItemTemplate>
+                     <%# Container.ItemIndex%3 == 0 ? (Container.ItemIndex == 0 ?"":"</tr><tr>"):""%>
+                     <td class="tdMosaico" onmouseover="this.className='tdMosaicoHover';" onmouseout="this.className='tdMosaico';">
+                        <a href='<%#Eval("LIGA")+valorT%>'>
+                           <img src='<%#Eval("NOM_ARCHIVO") %>' alt="Responsive image" onerror="this.src='http://www.coneval.org.mx/SiteCollectionImages/Paemir/LogosDependencias/imgNoExist.png'" class="imagenMosaico">
+                        </a>
+                     </td>
+                  </ItemTemplate>
+               </asp:Repeater>
+            </table>
+         </ContentTemplate>
+         <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="ddlCiclos" />
+         </Triggers>
+      </asp:UpdatePanel>
+      <asp:ObjectDataSource ID="odsMosaicos" runat="server" TypeName="SIMEPS.Dal.IndicadoresDal" SelectMethod="ConsultarMosaicos">
+         <SelectParameters>
+            <asp:ControlParameter ControlID="ddlCiclos" DefaultValue="2016" Name="pCiclo" />
+            <asp:QueryStringParameter DefaultValue="A" QueryStringField="t" Name="pCamino"  />
+         </SelectParameters>
+      </asp:ObjectDataSource>
+
+      <div class="tituloBusqueda">
+         <br />
+         <asp:Button runat="server" ID="btnBuscar" Text="Buscador Temático" CssClass="botonBuscar" OnClick="BuscarIndicador" /><br />
+      </div>
+   </div>
+</asp:Content>

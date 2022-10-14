@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="mirDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <Function Name="spMPAEM_BuscaIndicador_net" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Texto" Type="varchar(max)" Mode="In" />
+    <Parameter Name="Derecho" Type="smallint" Mode="In" />
+  </Function>
+  <Function Name="spMPAEM_Ciclos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Anio" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="spMPAEM_HistoricoIndRep" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pIdIndicador" Type="numeric" Mode="In" />
+  </Function>
+  <Function Name="spMPAEM_ListaIndicadoresDetalle_net" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pIdIndicador" Type="numeric" Mode="In" />
+    <Parameter Name="pNivel" Type="numeric" Mode="In" />
+    <Parameter Name="pIdNivel" Type="numeric" Mode="In" />
+    <Parameter Name="pIdMatriz" Type="numeric" Mode="In" />
+  </Function>
+  <Function Name="spMPAEM_Mosaicos_net" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Anio" Type="numeric" Mode="In" />
+  </Function>
+  <Function Name="spMPAEM_ObjetivosPorNivel_net" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pIdMatriz" Type="numeric" Mode="In" />
+    <Parameter Name="pNivel" Type="numeric" Mode="In" />
+  </Function>
+  <Function Name="spMPAEM_Parametro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Parametro" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="spMPAEM_Presupuestos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Ramo" Type="varchar" Mode="In" />
+    <Parameter Name="Modalidad" Type="char" Mode="In" />
+    <Parameter Name="palabraClave" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spMPAEM_Programas_net" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Anio" Type="numeric" Mode="In" />
+    <Parameter Name="Ramo" Type="varchar" Mode="In" />
+    <Parameter Name="Unidad" Type="varchar" Mode="In" />
+    <Parameter Name="palabraClave" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="pIdMatriz" Type="numeric" Mode="In" />
+  </Function>
+  <Function Name="spMPAEM_SupuestosNivel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pIdMatriz" Type="numeric" Mode="In" />
+    <Parameter Name="pNivel" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spMPAEM_Valoraciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="palabraClave" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Ramo" Type="int" Mode="In" />
+    <Parameter Name="Modalidad" Type="char" Mode="In" />
+  </Function>
+  <Function Name="spMPAEM_VariablesIndicador" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pIdIndicador" Type="numeric" Mode="In" />
+  </Function>
+  <EntityContainer Name="mirDBModelStoreContainer" />
+</Schema>

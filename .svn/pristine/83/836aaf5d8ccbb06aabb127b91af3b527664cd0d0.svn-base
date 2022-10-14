@@ -1,0 +1,193 @@
+﻿<%@ Page Title="SIMEPS - Sistema de Medición de la Política Social" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="DetalleIndicador.aspx.cs" Inherits="SIMEPS.DetalleIndicador" %>
+<%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
+
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+	
+	 <div id="divBotones" style="float:left; width:100%">        
+			<input type="submit" id="linkDescargaFichaTecnica" onclick='fjsDetenerEvento(event);fjsDescargaFichaIndicadores(this,true);' value="Descarga Ficha del indicador" class="botonDescarga" style="float:right" />
+	 </div>
+	<br />
+	<br />
+	<div class="borderedFrame"> 
+	    <div id="divRegresar" style="display:none; float:right">
+	        <label id="lblRegresar" class="btn btn-primary" style="font-size:11pt;"  onclick="window.history.back()">					
+			    Regresar
+		    </label>
+         </div>  
+		<div style="text-align: center; padding-top: 10px;">
+					<b>Tipo de Gráfica: </b>
+					<img src="img/Grafica/barras.png" title="Gráfica de barras" style="width: 30px" onclick="fjsMostrarGrafica('barra')"
+						class="btnOut" onmouseover="this.className='btnHover'" onmouseout="this.className='btnOut'" />
+					<img src="img/Grafica/lineal.png" title="Gráfica lineal" style="width: 32px" onclick="fjsMostrarGrafica('lineal')"
+						class="btnOut" onmouseover="this.className='btnHover'" onmouseout="this.className='btnOut'" />
+		</div>
+
+	
+					<div id="divGrafica" style="max-width: 580px; height: 300px; padding-left: 10px;"></div>
+					<div style="text-align: justify; font-size: 10px; font-family: Arial; font-style: italic">
+						Fuente: Elaboración CONEVAL con base en 
+									información del Portal Aplicativo de​ la 
+									Secretaría de Hacienda y Crédito Público 
+									(PASH)
+					</div>
+					<br />
+					<div style="text-align: center; font-size: 12px; font-family: Arial; font-weight: bold; display: none" id="divSinInformacion">
+						No se cuenta con información del indicador 
+									del programa
+					</div>
+
+					<asp:DropDownList ID="ddlGraficaInd" runat="server" CssClass="select" DataSourceID="odsGraficaIndicador" DataTextField="GRAFICA" DataValueField="NO" Style="display: none">
+					</asp:DropDownList>
+
+					<asp:ObjectDataSource ID="odsGraficaIndicador" runat="server" TypeName="Paemir.Dal.IndicadoresDal" SelectMethod="ConsultarHistorico">
+						<SelectParameters>
+							<asp:QueryStringParameter Name="dIndicador" QueryStringField="pIdIndicador" Type="Decimal" DefaultValue="0" />
+						</SelectParameters>
+					</asp:ObjectDataSource>
+
+
+
+		
+					
+							<rsweb:ReportViewer 
+							ID="ReportViewer1" 
+							runat="server" 
+								Height="130px"
+                                Width="100%"
+							ProcessingMode="Remote" 
+							ShowParameterPrompts="false"
+							OnLoad="ReportViewer_OnLoad"
+							CssClass="reporteHistorico"            
+							>
+						</rsweb:ReportViewer>
+					
+			
+
+
+
+			<table class="tablaIndicadores">
+			<tr style="vertical-align: top">
+				<td></td>
+			</tr>
+			<asp:Repeater ID="rprDetalleInd" runat="server" DataSourceID="odsDetalleInd">
+				<ItemTemplate>
+					<tr>
+						<td class="headerPrograma">
+							<asp:Label ID="lblPrograma" runat="server" Text='<%#Eval("NOMBRE_MATRIZ") %>' style="padding-left: 24px; display: table-cell; vertical-align: middle;"></asp:Label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span id="spnTituloIndicador"></span>
+						</td>
+					</tr>
+					<tr>
+						<td class="rowObjetivo" style="border-right: 2px; border-right-style: solid !important; border-top: 1px; border-style: solid;">Objetivo</td>
+					</tr>
+					<tr>
+						<td class="rowDescObjetivo bordeObj">
+							<asp:Label ID="lblDescNivel" runat="server" Text='<%#Eval("DESC_NIVEL") %>'></asp:Label>
+						</td>
+					</tr>
+					<tr>
+						<td class="rowIndicador">
+							<asp:Label ID="lblNombreInd" runat="server" Text='<%#Eval("NOMBRE_IND") %>'></asp:Label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<table class="tablaDetalleInd">
+								<tr>
+									<td class="indicadorDetalleTd columnDetalleInd" style="border: 2px; border-color: #FFFFFF; border-style: solid;">Definición
+									</td>
+									<td class="indicadorDetalleTd" style="border: 2px; border-color: #FFFFFF; border-style: solid;">
+										<asp:Label ID="lblDefInd" runat="server" Text='<%#Eval("DEFINICION_IND") %>'></asp:Label>
+									</td>
+								</tr>
+								<tr>
+									<td class="indicadorDetalleTd columnDetalleInd" style="border: 2px; border-color: #FFFFFF; border-style: solid;">Método de Cálculo
+									</td>
+									<td class="indicadorDetalleTd" style="border: 2px; border-color: #FFFFFF; border-style: solid;">
+										<asp:Label ID="lblMetCalcInd" runat="server" Text='<%#Eval("METODO_CALCULO_IND") %>'></asp:Label>
+									</td>
+								</tr>
+								<tr>
+									<td class="indicadorDetalleTd columnDetalleInd" style="border: 2px; border-color: #FFFFFF; border-style: solid;">Frecuencia de Medición
+									</td>
+									<td class="indicadorDetalleTd" style="border: 2px; border-color: #FFFFFF; border-style: solid;">
+										<asp:Label ID="lblFrecMedInd" runat="server" Text='<%#Eval("FRECUENCIA_MEDICION") %>'></asp:Label>
+									</td>
+								</tr>
+								<tr>
+									<td class="indicadorDetalleTd columnDetalleInd" style="border: 2px; border-color: #FFFFFF; border-style: solid;">Unidad de Medida
+									</td>
+									<td class="indicadorDetalleTd" style="border: 2px; border-color: #FFFFFF; border-style: solid;">
+										<asp:Label ID="lblUnidadMedidaInd" runat="server" Text='<%#Eval("UNIDAD_MEDIDA") %>'></asp:Label>
+									</td>
+								</tr>
+								<tr>
+									<td class="indicadorDetalleTd columnDetalleInd" style="border: 2px; border-color: #FFFFFF; border-style: solid;">Meta Absoluta Planeada
+									</td>
+									<td class="indicadorDetalleTd" style="border: 2px; border-color: #FFFFFF; border-style: solid;">
+										<asp:Label ID="lblMetaAbsPlaInd" runat="server" Text='<%#Eval("META_ABS_PLANEADA") %>'></asp:Label>
+									</td>
+								</tr>
+								<tr>
+									<td class="indicadorDetalleTd columnDetalleInd" style="border: 2px; border-color: #FFFFFF; border-style: solid;">Meta Absoluta Alcanzada
+									</td>
+									<td class="indicadorDetalleTd" style="border: 2px; border-color: #FFFFFF; border-style: solid;">
+										<asp:Label ID="lblMetaAbsAlcInd" runat="server" Text='<%#Eval("META_ABS_ALCANZADA") %>'></asp:Label>
+									</td>
+								</tr>
+								<tr>
+									<td class="indicadorDetalleTd columnDetalleInd" style="border: 2px; border-color: #FFFFFF; border-style: solid;">Meta Relativa Planeada
+									</td>
+									<td class="indicadorDetalleTd" style="border: 2px; border-color: #FFFFFF; border-style: solid;">
+										<asp:Label ID="lblMetaRelPlaInd" runat="server" Text='<%#Eval("META_REL_PLANEADA") %>'></asp:Label>
+									</td>
+								</tr>
+								<tr>
+									<td class="indicadorDetalleTd columnDetalleInd" style="border: 2px; border-color: #FFFFFF; border-style: solid;">Meta Relativa Alcanzada
+									</td>
+									<td class="indicadorDetalleTd" style="border: 2px; border-color: #FFFFFF; border-style: solid;">
+										<asp:Label ID="lblMetaRelAbsInd" runat="server" Text='<%#Eval("META_REL_ALCANZADA") %>'></asp:Label>
+									</td>
+								</tr>
+								<tr>
+									<td class="indicadorDetalleTd columnDetalleInd" style="border: 2px; border-color: #FFFFFF; border-style: solid;">Línea Base
+									</td>
+									<td class="indicadorDetalleTd" style="border: 2px; border-color: #FFFFFF; border-style: solid;">
+										<asp:Label ID="lblLineaBaseInd" runat="server" Text='<%#Eval("LINEA_BASE") %>'></asp:Label>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</ItemTemplate>
+			</asp:Repeater>
+			<asp:ObjectDataSource ID="odsDetalleInd" runat="server" TypeName="Paemir.Dal.IndicadoresDal" SelectMethod="ConsultarIndicador">
+				<SelectParameters>
+					<asp:QueryStringParameter Name="idMatriz" QueryStringField="pIdMatriz" Type="Decimal" DefaultValue="0" />
+					<asp:QueryStringParameter Name="nivel" QueryStringField="pNivel" Type="Int32" DefaultValue="0" />
+					<asp:QueryStringParameter Name="idNivel" QueryStringField="pIdNivel" Type="Decimal" DefaultValue="0" />
+					<asp:QueryStringParameter Name="dIndicador" QueryStringField="pIdIndicador" Type="String" DefaultValue="0" />
+				</SelectParameters>
+			</asp:ObjectDataSource>
+		</table>
+
+	
+
+
+	</div>
+
+	<script>
+	    fjsCargaDetalleIndicador();
+	    if (window.location.search.match("[?&]IsDlg=1") || window.location.search.match("[?&]view=")) {
+	        removeStyleDialog();
+	        document.getElementById("divRegresar").style.display = "block";
+	    }
+	</script>
+</asp:Content>

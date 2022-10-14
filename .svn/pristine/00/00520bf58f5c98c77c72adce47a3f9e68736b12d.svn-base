@@ -1,0 +1,99 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="SIMEPS.Home" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
+   <div class="titulo-home">
+      <p>¿Qué es el Sistema de Monitoreo de la Política Social?</p>
+   </div>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+   <div class="borderedFrame">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="textoHome">
+               <div class="col-md-12">
+                  <br />
+                  <br />
+                  <span class="textoHome text-justify">El Sistema de Monitoreo de la Política Social expone el seguimiento de los indicadores de los programas y acciones sociales, así como los indicadores derivados del Plan Nacional de Desarrollo 2013 – 2018. Todos ellos proveen información oportuna y robusta sobre el alcance de los objetivos de los programas.</span>
+                  <br />
+                  <br />
+                  <span class="textoHome">Los indicadores a nivel propósito y componentes, los podrás encontrar en el <strong>Sistema de Indicadores de los Programas y Acciones Sociales (SIPS),</strong> mientras que los indicadores del programas derivados del PND y los indicadores a nivel Fin están contenidos en el <strong>Sistema de Indicadores de la Política Social (SIPOL). ¡Conoce el Sistema de Monitoreo de la Política Social del CONEVAL!</strong></span>
+                  <br />
+                  <br />
+                  <br />
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="row textoHome">
+         <div class="col-md-6">
+            <div class="col-md-12 col-xs-6">
+               <img id="collage1" class="img-home" src="img/collage1.jpg" />
+            </div>
+         </div>
+
+         <div class="col-md-6">
+            <div class="col-md-12 col-xs-6">
+               <p class="textoHome text-justify">
+                  Consulta la evolución de los indicadores de los programas sociales de 2008 a la fecha; aquí, podrás encontrar información sobre variables como productividad, salud, alimentación, becas, ingresos, etc.
+               </p>
+               <p class="textoHome text-justify">También, podrás descargar los Informes de Monitoreo por cada programa social.</p>
+            </div>
+            <div class="col-md-12 col-sm-6 col-xs-12">
+               <div class="col-md-6 col-xs-12 col-lg-6 col-sm-12 div-alto"></div>
+               <div class="col-sm-12 col-xs-12">
+                  <asp:Button runat="server" ID="SIPS" Text="Sistema de Indicadores de Programas y Acciones Sociales" CssClass="btn btn-success btn-lg btn-block btn-sistemas" OnClick="SIPS_Click" />
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="col-md-12 col-xs-12 div-alto"></div>
+
+      <div class="row textoHome">
+
+         <div class="col-md-6">
+            <div class="col-md-12 col-xs-6">
+               <img id="collage2" class="img-home" src="img/collage2.jpg" />
+            </div>
+         </div>
+
+         <div class="col-md-6">
+            <div class="col-md-12 col-xs-6">
+               <p class="textoHome text-justify">
+                  Encuentra información sobre los indicadores de los programas que se derivan de la planeación nacional 2013 – 2018 del ámbito de desarrollo social. En el SIPOL hallarás información sobre las principales variables prioritarias de la administración pública actual.
+               </p>
+            </div>
+
+            <div class="col-md-12 col-sm-6 col-xs-12">
+               <div class="col-md-6 col-xs-12 col-lg-6 col-sm-12 div-alto"></div>
+               <div class="col-md-12 col-xs-12">
+                  <asp:Button runat="server" ID="SIPOL" Text="Sistema de Indicadores de la Política Social" CssClass="btn btn-success btn-lg btn-block btn-sistemas" OnClick="SIPOL_Click" />
+               </div>
+            </div>
+
+         </div>
+      </div>
+
+      <div class="col-md-12 col-xs-12 div-alto"></div>
+
+      <div class="row">
+         <div class="col-md-6 col-sm-6 cols-xs-12">
+            <div id="divGrafIndica" class="centered" style="min-width: 310px; min-height: 350px;"></div>
+         </div>
+         <div class="col-md-6 col-sm-6 cols-xs-12">
+            <div id="divGrafIndicaTotal" class="centered" style="min-width: 310px; min-height: 322px;"></div>
+         </div>
+      </div>
+            
+   </div>
+   <asp:DropDownList ID="ddlTotalIndicadores" runat="server" CssClass="select" DataSourceID="odsGraficaIndicador" DataTextField="TotalIndicadores" DataValueField="CICLO" Style="display: none">
+   </asp:DropDownList>
+
+   <asp:DropDownList ID="ddlTotalClasificados" runat="server" CssClass="select" DataSourceID="odsGraficaIndicador" DataTextField="TotalClasificados" DataValueField="CICLO" Style="display: none">
+   </asp:DropDownList>
+
+   <asp:ObjectDataSource ID="odsGraficaIndicador" runat="server" TypeName="SIMEPS.Dal.IndicadoresDal" SelectMethod="ConsultarTodosIndicadores"></asp:ObjectDataSource>
+</asp:Content>

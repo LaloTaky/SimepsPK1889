@@ -1,0 +1,557 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Despliegues\SIMEPS</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="BDIndicadoresPrograma.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="BDIndicadoresProgramaCSV.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="BDIndicadoresProgramaRS.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="bin/clienteSIID.dll">
+      <publishTime>12/15/2020 16:47:20</publishTime>
+    </File>
+    <File Include="bin/clienteSIID.pdb">
+      <publishTime>12/15/2020 16:47:20</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>08/05/2020 09:09:13</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll.refresh">
+      <publishTime>08/05/2020 09:09:13</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>08/05/2020 09:09:13</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll.refresh">
+      <publishTime>08/05/2020 09:09:13</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
+      <publishTime>08/05/2020 09:09:13</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.DependencyCollector.dll">
+      <publishTime>08/05/2020 09:09:13</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.PerfCounterCollector.dll">
+      <publishTime>08/05/2020 09:09:13</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.ServerTelemetryChannel.dll">
+      <publishTime>08/05/2020 09:09:13</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.Web.dll">
+      <publishTime>08/05/2020 09:09:13</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.WindowsServer.dll">
+      <publishTime>08/05/2020 09:09:13</publishTime>
+    </File>
+    <File Include="bin/Microsoft.ApplicationInsights.dll">
+      <publishTime>08/05/2020 09:09:13</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Diagnostics.Tracing.EventSource.dll">
+      <publishTime>08/05/2020 09:09:13</publishTime>
+    </File>
+    <File Include="bin/Microsoft.ReportViewer.Common.dll">
+      <publishTime>08/05/2020 09:09:13</publishTime>
+    </File>
+    <File Include="bin/Microsoft.ReportViewer.WebForms.dll">
+      <publishTime>08/05/2020 09:09:13</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Threading.Tasks.dll">
+      <publishTime>08/05/2020 09:09:13</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Threading.Tasks.Extensions.Desktop.dll">
+      <publishTime>08/05/2020 09:09:13</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Threading.Tasks.Extensions.dll">
+      <publishTime>08/05/2020 09:09:13</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>06/18/2017 13:57:10</publishTime>
+    </File>
+    <File Include="bin/SIMEPS.dll">
+      <publishTime>12/22/2020 17:43:10</publishTime>
+    </File>
+    <File Include="bin/SIMEPS.pdb">
+      <publishTime>12/22/2020 17:43:10</publishTime>
+    </File>
+    <File Include="bin/System.IO.dll">
+      <publishTime>08/05/2020 09:09:13</publishTime>
+    </File>
+    <File Include="bin/System.Runtime.dll">
+      <publishTime>08/05/2020 09:09:13</publishTime>
+    </File>
+    <File Include="bin/System.Threading.Tasks.dll">
+      <publishTime>08/05/2020 09:09:13</publishTime>
+    </File>
+    <File Include="BuscaIndicador.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="Comun/Controls/Progress.ascx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="Content/bootstrap.css">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="Content/bootstrap3-custom.min.css">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="Content/carouselIndSectorial.css">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="Content/conevalTheme.css">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="Content/owl.carousel.min.css">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="Content/owl.theme.default.min.css">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="Content/Simeps.css">
+      <publishTime>12/15/2020 20:04:12</publishTime>
+    </File>
+    <File Include="Content/tkn.txt">
+      <publishTime>12/22/2020 12:25:33</publishTime>
+    </File>
+    <File Include="DescargaMIR.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="DescargarBasePND.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="DescargarFTIndicador.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="DescargarFTIndicadores.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="Descargas/dummy.txt">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="DetalleIndicador.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="DetalleIndicadorFin.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="ErrorPage.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="FichaIndicadores.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="FichasMonitoreo.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.eot">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.svg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.woff">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.woff2">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="Home.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="HomeRamo33.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="HomeSIPOL.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/adecuado.png">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/aprobacion.png">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/Ascendente.png">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/BotonesMetasNacionales/boton_pasd_pnd.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/BotonesMetasNacionales/boton_pnd.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/BotonesMetasNacionales/btn_estrategias_transversales.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/BotonesMetasNacionales/btn_estrategias_transversales_over.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/BotonesMetasNacionales/btn_mexicoenpaz.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/BotonesMetasNacionales/btn_mexicoenpaz_over.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/BotonesMetasNacionales/btn_mexicoglobal.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/BotonesMetasNacionales/btn_mexicoglobal_over.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/BotonesMetasNacionales/btn_mexicoincluyentes.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/BotonesMetasNacionales/btn_mexicoincluyentes_over.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/BotonesMetasNacionales/btn_mexiconeducacioncalidad.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/BotonesMetasNacionales/btn_mexiconeducacioncalidad_over.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/BotonesMetasNacionales/btn_mexicoprospero.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/BotonesMetasNacionales/btn_mexicoprospero_over.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/busqueda.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/collage1.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/collage2.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/comparador.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/comparador2.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/condicionada.png">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/derecho_Alimentación.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/derecho_Bienestar Económico.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/derecho_Educación.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/derecho_Medio Ambiente Sano.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/derecho_No Discriminación.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/derecho_Salud.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/derecho_Seguridad Social.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/derecho_servicios.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/derecho_Trabajo.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/derecho_Vivienda.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/descargaDatos.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/descarga_csv.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/descarga_datos2.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/descarga_datos3.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/descarga_docdatos.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/descarga_docs.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/descarga_excel.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/descarga_pdf.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/descarga_word.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/Descendente.png">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/destacado.png">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/encabezado.png">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/fichasmonitoreo.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/Grafica/barras.png">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/Grafica/dragIcon.gif">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/Grafica/dragIconBlack.gif">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/Grafica/dragIconH.gif">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/Grafica/dragIconHBlack.gif">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/Grafica/dragIconRoundBig.png">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/Grafica/dragIconRoundBig.svg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/Grafica/export.png">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/Grafica/exportWhite.png">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/Grafica/lens.png">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/Grafica/lens.svg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/Grafica/lensWhite.png">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/Grafica/lineal.png">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/HEADER_HOME_CONEVAL.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/iconoindicador_01.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/iconoindicador_02.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/iconosredessociales/icono_blog.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/iconosredessociales/icono_facebook.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/iconosredessociales/icono_twitter.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/iconosredessociales/icono_youtube.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/Iconos_home/moduloindicadores.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/Iconos_home/moduloindicadores2.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/Iconos_home/moduloindicadores_blue.png">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/Iconos_home/moduloindicadores_green.png">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/Iconos_home/moduloindicadorramo33.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/indicadoresprogramas.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/logoConeval.png">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/logotipoconeval_blanco.png">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/logotipoconeval_color.png">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/loquesemide_leyenda.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/mejora.png">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/mejorapoliticas.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/moderado.png">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/nocuenta.png">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/tomadoresdecisiones.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="img/transparencia.jpg">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="IndicadoresR33.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="IndicadorR33.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="IndicadorSectorial.aspx">
+      <publishTime>12/09/2020 19:54:10</publishTime>
+    </File>
+    <File Include="IndicadorSectorial19-24.aspx">
+      <publishTime>12/16/2020 14:45:42</publishTime>
+    </File>
+    <File Include="IndicadorSectorial4T.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="ListaObjetivos.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="Log/DescargaAppLog">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="MetasNacionales.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="MIR.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="Monitoreo.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="MosaicoFin.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="MosaicoRamo33.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="MosaicoSectores.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="MosaicoSectores19-24.aspx">
+      <publishTime>12/15/2020 20:02:45</publishTime>
+    </File>
+    <File Include="MosaicoSectores4T.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="MosaicoSipol.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="MosaicoSips.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="Programa.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="ProgramaFin.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="Programas.aspx">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="scripts/ai.0.15.0-build58334.js">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="scripts/ai.0.15.0-build58334.min.js">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="scripts/bootstrap.js">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="scripts/bootstrap.min.js">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="scripts/charts/amcharts.js">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="scripts/charts/ammap.js">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="scripts/charts/light.js">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="scripts/charts/pie.js">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="scripts/charts/serial.js">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="scripts/Graficas.js">
+      <publishTime>12/10/2020 15:33:31</publishTime>
+    </File>
+    <File Include="scripts/iframeResizer.contentWindow.min.js">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="scripts/IndicadorR33.js">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="scripts/indicadorRamo33.js">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="scripts/jquery-1.12.3.js">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="scripts/jquery-1.12.3.min.js">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="scripts/jquery.min.js">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="scripts/mexicoSae.js">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="scripts/owl.carousel.js">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="scripts/Simeps.js">
+      <publishTime>12/15/2020 12:08:28</publishTime>
+    </File>
+    <File Include="Site.Master">
+      <publishTime>12/08/2020 19:59:28</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>12/10/2020 09:28:40</publishTime>
+    </File>
+    <File Include="web.sitemap">
+      <publishTime>12/09/2020 20:45:21</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

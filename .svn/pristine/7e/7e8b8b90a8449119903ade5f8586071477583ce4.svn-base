@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="inventarioDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="inventarioDBEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="spFiltrosFederales" ReturnType="Collection(inventarioDBModel.spFiltrosFederales_Result)">
+      <Parameter Name="Anio" Mode="In" Type="String" />
+      <Parameter Name="Prefijo" Mode="In" Type="String" />
+      <Parameter Name="Derecho" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="spFiltrosFederales_Result">
+    <Property Type="Int32" Name="DER_ID_I" Nullable="false" />
+    <Property Type="String" Name="DER_DESCRIPCION_I" Nullable="false" />
+  </ComplexType>
+</Schema>

@@ -1,0 +1,727 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{47B456A0-C187-4E4D-9EAA-AEC1D05C7DD2}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SIMEPS</RootNamespace>
+    <AssemblyName>SIMEPS</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <TargetFrameworkProfile />
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>SecurityRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.0.1010, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.0\lib\net40\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=1.2.3.246, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.1.2.3\lib\net40\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=1.2.3.246, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.1.2.3\lib\net40\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=1.2.3.246, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.1.2.3\lib\net40\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=1.2.3.246, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.1.2.3\lib\net40\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=1.2.3.246, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.1.2.3\lib\net40\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=1.2.3.490, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.1.2.3\lib\net40\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Diagnostics.Tracing.EventSource, Version=1.1.24.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.24\lib\net40\Microsoft.Diagnostics.Tracing.EventSource.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Tools, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Tools.Excel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop, Version=1.0.168.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="OFFICE, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\..\..\..\..\Windows\assembly\GAC_MSIL\office\15.0.0.0__71e9bce111e9429c\OFFICE.DLL</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BDIndicadoresPrograma.aspx" />
+    <Content Include="BDIndicadoresProgramaCSV.aspx" />
+    <Content Include="BDIndicadoresProgramaRS.aspx" />
+    <Content Include="bin\EntityFramework.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\Microsoft.AI.Agent.Intercept.dll" />
+    <Content Include="bin\Microsoft.AI.DependencyCollector.dll" />
+    <Content Include="bin\Microsoft.AI.PerfCounterCollector.dll" />
+    <Content Include="bin\Microsoft.AI.ServerTelemetryChannel.dll" />
+    <Content Include="bin\Microsoft.AI.Web.dll" />
+    <Content Include="bin\Microsoft.AI.WindowsServer.dll" />
+    <Content Include="bin\Microsoft.ApplicationInsights.dll" />
+    <Content Include="bin\Microsoft.Diagnostics.Tracing.EventSource.dll" />
+    <Content Include="bin\Microsoft.Threading.Tasks.dll" />
+    <Content Include="bin\Microsoft.Threading.Tasks.Extensions.Desktop.dll" />
+    <Content Include="bin\Microsoft.Threading.Tasks.Extensions.dll" />
+    <Content Include="bin\System.IO.dll" />
+    <Content Include="bin\System.Runtime.dll" />
+    <Content Include="bin\System.Threading.Tasks.dll" />
+    <Content Include="BuscaIndicador.aspx" />
+    <Content Include="Comun\Controls\Progress.ascx" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap3-custom.min.css" />
+    <Content Include="Content\carouselIndSectorial.css" />
+    <Content Include="Content\conevalTheme.css" />
+    <Content Include="Content\owl.carousel.min.css" />
+    <Content Include="Content\owl.theme.default.min.css" />
+    <Content Include="Content\Simeps.css" />
+    <Content Include="Content\tkn.txt" />
+    <Content Include="DescargaMIR.aspx" />
+    <Content Include="DescargarBasePND.aspx" />
+    <Content Include="DescargarFTIndicador.aspx" />
+    <Content Include="DescargarFTIndicadores.aspx" />
+    <Content Include="Descargas\dummy.txt" />
+    <Content Include="DetalleIndicador.aspx" />
+    <Content Include="DetalleIndicadorFin.aspx" />
+    <Content Include="ErrorPage.aspx" />
+    <Content Include="FichaIndicadores.aspx" />
+    <Content Include="FichasMonitoreo.aspx" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="HomeRamo33.aspx" />
+    <Content Include="HomeSIPOL.aspx" />
+    <Content Include="Home.aspx" />
+    <Content Include="img\adecuado.png" />
+    <Content Include="img\aprobacion.png" />
+    <Content Include="img\Ascendente.png" />
+    <Content Include="img\BotonesMetasNacionales\boton_pasd_pnd.jpg" />
+    <Content Include="img\BotonesMetasNacionales\boton_pnd.jpg" />
+    <Content Include="img\BotonesMetasNacionales\btn_estrategias_transversales.jpg" />
+    <Content Include="img\BotonesMetasNacionales\btn_estrategias_transversales_over.jpg" />
+    <Content Include="img\BotonesMetasNacionales\btn_mexicoenpaz.jpg" />
+    <Content Include="img\BotonesMetasNacionales\btn_mexicoenpaz_over.jpg" />
+    <Content Include="img\BotonesMetasNacionales\btn_mexicoglobal.jpg" />
+    <Content Include="img\BotonesMetasNacionales\btn_mexicoglobal_over.jpg" />
+    <Content Include="img\BotonesMetasNacionales\btn_mexicoincluyentes.jpg" />
+    <Content Include="img\BotonesMetasNacionales\btn_mexicoincluyentes_over.jpg" />
+    <Content Include="img\BotonesMetasNacionales\btn_mexiconeducacioncalidad.jpg" />
+    <Content Include="img\BotonesMetasNacionales\btn_mexiconeducacioncalidad_over.jpg" />
+    <Content Include="img\BotonesMetasNacionales\btn_mexicoprospero.jpg" />
+    <Content Include="img\BotonesMetasNacionales\btn_mexicoprospero_over.jpg" />
+    <Content Include="img\busqueda.jpg" />
+    <Content Include="img\collage1.jpg" />
+    <Content Include="img\collage2.jpg" />
+    <Content Include="img\comparador.jpg" />
+    <Content Include="img\comparador2.jpg" />
+    <Content Include="img\condicionada.png" />
+    <Content Include="img\derecho_Alimentación.jpg" />
+    <Content Include="img\derecho_Bienestar Económico.jpg" />
+    <Content Include="img\derecho_Educación.jpg" />
+    <Content Include="img\derecho_Medio Ambiente Sano.jpg" />
+    <Content Include="img\derecho_No Discriminación.jpg" />
+    <Content Include="img\derecho_Salud.jpg" />
+    <Content Include="img\derecho_Seguridad Social.jpg" />
+    <Content Include="img\derecho_servicios.jpg" />
+    <Content Include="img\derecho_Trabajo.jpg" />
+    <Content Include="img\derecho_Vivienda.jpg" />
+    <Content Include="img\descargaDatos.jpg" />
+    <Content Include="img\descarga_csv.jpg" />
+    <Content Include="img\descarga_datos2.jpg" />
+    <Content Include="img\descarga_datos3.jpg" />
+    <Content Include="img\descarga_docdatos.jpg" />
+    <Content Include="img\descarga_docs.jpg" />
+    <Content Include="img\descarga_excel.jpg" />
+    <Content Include="img\descarga_pdf.jpg" />
+    <Content Include="img\descarga_word.jpg" />
+    <Content Include="img\Descendente.png" />
+    <Content Include="img\destacado.png" />
+    <Content Include="img\encabezado.png" />
+    <Content Include="img\fichasmonitoreo.jpg" />
+    <Content Include="img\Grafica\barras.png" />
+    <Content Include="img\Grafica\dragIcon.gif" />
+    <Content Include="img\Grafica\dragIconBlack.gif" />
+    <Content Include="img\Grafica\dragIconH.gif" />
+    <Content Include="img\Grafica\dragIconHBlack.gif" />
+    <Content Include="img\Grafica\dragIconRoundBig.png" />
+    <Content Include="img\Grafica\dragIconRoundBig.svg" />
+    <Content Include="img\Grafica\export.png" />
+    <Content Include="img\Grafica\exportWhite.png" />
+    <Content Include="img\Grafica\lens.png" />
+    <Content Include="img\Grafica\lens.svg" />
+    <Content Include="img\Grafica\lensWhite.png" />
+    <Content Include="img\Grafica\lineal.png" />
+    <Content Include="img\HEADER_HOME_CONEVAL.jpg" />
+    <Content Include="img\iconoindicador_01.jpg" />
+    <Content Include="img\iconoindicador_02.jpg" />
+    <Content Include="img\iconosredessociales\icono_blog.jpg" />
+    <Content Include="img\iconosredessociales\icono_facebook.jpg" />
+    <Content Include="img\iconosredessociales\icono_twitter.jpg" />
+    <Content Include="img\iconosredessociales\icono_youtube.jpg" />
+    <Content Include="img\Iconos_home\moduloindicadores.jpg" />
+    <Content Include="img\Iconos_home\moduloindicadores2.jpg" />
+    <Content Include="img\Iconos_home\moduloindicadorramo33.jpg" />
+    <Content Include="img\indicadoresprogramas.jpg" />
+    <Content Include="img\logoConeval.png" />
+    <Content Include="img\logotipoconeval_blanco.png" />
+    <Content Include="img\logotipoconeval_color.png" />
+    <Content Include="img\loquesemide_leyenda.jpg" />
+    <Content Include="img\mejora.png" />
+    <Content Include="img\mejorapoliticas.jpg" />
+    <Content Include="img\moderado.png" />
+    <Content Include="img\Iconos_home\moduloindicadores_blue.png" />
+    <Content Include="img\Iconos_home\moduloindicadores_green.png" />
+    <Content Include="img\nocuenta.png" />
+    <Content Include="img\tomadoresdecisiones.jpg" />
+    <Content Include="img\transparencia.jpg" />
+    <Content Include="IndicadoresR33.aspx" />
+    <Content Include="IndicadorR33.aspx" />
+    <Content Include="IndicadorSectorial19-24.aspx" />
+    <Content Include="IndicadorSectorial.aspx" />
+    <Content Include="ListaObjetivos.aspx" />
+    <Content Include="MetasNacionales.aspx" />
+    <Content Include="MIR.aspx" />
+    <Content Include="Monitoreo.aspx" />
+    <Content Include="MosaicoRamo33.aspx" />
+    <Content Include="MosaicoSectores19-24.aspx" />
+    <Content Include="MosaicoSectores.aspx" />
+    <Content Include="MosaicoFin.aspx" />
+    <Content Include="MosaicoSipol.aspx" />
+    <Content Include="MosaicoSips.aspx" />
+    <Content Include="Programa.aspx" />
+    <Content Include="ProgramaFin.aspx" />
+    <Content Include="Programas.aspx" />
+    <Content Include="scripts\ai.0.15.0-build58334.js" />
+    <Content Include="scripts\ai.0.15.0-build58334.min.js" />
+    <Content Include="scripts\bootstrap.js" />
+    <Content Include="scripts\bootstrap.min.js" />
+    <Content Include="scripts\charts\amcharts.js" />
+    <Content Include="scripts\charts\ammap.js" />
+    <Content Include="scripts\charts\light.js" />
+    <Content Include="scripts\charts\pie.js" />
+    <Content Include="scripts\charts\serial.js" />
+    <Content Include="scripts\Graficas.js" />
+    <Content Include="scripts\iframeResizer.contentWindow.min.js" />
+    <Content Include="scripts\IndicadorR33.js" />
+    <Content Include="scripts\indicadorRamo33.js" />
+    <Content Include="scripts\jquery-1.12.3.js" />
+    <Content Include="scripts\jquery-1.12.3.min.js" />
+    <Content Include="scripts\jquery.min.js" />
+    <Content Include="scripts\mexicoSae.js" />
+    <Content Include="scripts\owl.carousel.js" />
+    <Content Include="scripts\Simeps.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BDIndicadoresProgramaCSV.aspx.cs">
+      <DependentUpon>BDIndicadoresProgramaCSV.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BDIndicadoresProgramaCSV.aspx.designer.cs">
+      <DependentUpon>BDIndicadoresProgramaCSV.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BDIndicadoresProgramaRS.aspx.cs">
+      <DependentUpon>BDIndicadoresProgramaRS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BDIndicadoresProgramaRS.aspx.designer.cs">
+      <DependentUpon>BDIndicadoresProgramaRS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BuscaIndicador.aspx.cs">
+      <DependentUpon>BuscaIndicador.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuscaIndicador.aspx.designer.cs">
+      <DependentUpon>BuscaIndicador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Comun\ConevalReportServerCredentials.cs" />
+    <Compile Include="Comun\Controls\Progress.ascx.cs">
+      <DependentUpon>Progress.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Comun\Controls\Progress.ascx.designer.cs">
+      <DependentUpon>Progress.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Comun\ExcelUtilities.cs" />
+    <Compile Include="Comun\Logger.cs" />
+    <Compile Include="Comun\Utils.cs" />
+    <Compile Include="Dal\IndicadoresDal.cs" />
+    <Compile Include="Dal\ReportesDal.cs" />
+    <Compile Include="DescargaMIR.aspx.cs">
+      <DependentUpon>DescargaMIR.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DescargaMIR.aspx.designer.cs">
+      <DependentUpon>DescargaMIR.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DescargarBasePND.aspx.cs">
+      <DependentUpon>DescargarBasePND.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DescargarBasePND.aspx.designer.cs">
+      <DependentUpon>DescargarBasePND.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DescargarFTIndicador.aspx.cs">
+      <DependentUpon>DescargarFTIndicador.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DescargarFTIndicador.aspx.designer.cs">
+      <DependentUpon>DescargarFTIndicador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DescargarFTIndicadores.aspx.cs">
+      <DependentUpon>DescargarFTIndicadores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DescargarFTIndicadores.aspx.designer.cs">
+      <DependentUpon>DescargarFTIndicadores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DetalleIndicador.aspx.cs">
+      <DependentUpon>DetalleIndicador.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DetalleIndicador.aspx.designer.cs">
+      <DependentUpon>DetalleIndicador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DetalleIndicadorFin.aspx.cs">
+      <DependentUpon>DetalleIndicadorFin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DetalleIndicadorFin.aspx.designer.cs">
+      <DependentUpon>DetalleIndicadorFin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorPage.aspx.cs">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPage.aspx.designer.cs">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FichasMonitoreo.aspx.cs">
+      <DependentUpon>FichasMonitoreo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FichasMonitoreo.aspx.designer.cs">
+      <DependentUpon>FichasMonitoreo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="HomeRamo33.aspx.cs">
+      <DependentUpon>HomeRamo33.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HomeRamo33.aspx.designer.cs">
+      <DependentUpon>HomeRamo33.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HomeSIPOL.aspx.cs">
+      <DependentUpon>HomeSIPOL.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HomeSIPOL.aspx.designer.cs">
+      <DependentUpon>HomeSIPOL.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Home.aspx.designer.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="IndicadoresR33.aspx.cs">
+      <DependentUpon>IndicadoresR33.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="IndicadoresR33.aspx.designer.cs">
+      <DependentUpon>IndicadoresR33.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="IndicadorR33.aspx.cs">
+      <DependentUpon>IndicadorR33.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="IndicadorR33.aspx.designer.cs">
+      <DependentUpon>IndicadorR33.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="IndicadorR33.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="IndicadorSectorial19-24.aspx.cs">
+      <DependentUpon>IndicadorSectorial19-24.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="IndicadorSectorial19-24.aspx.designer.cs">
+      <DependentUpon>IndicadorSectorial19-24.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="IndicadorSectorial.aspx.cs">
+      <DependentUpon>IndicadorSectorial.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="IndicadorSectorial.aspx.designer.cs">
+      <DependentUpon>IndicadorSectorial.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListaObjetivos.aspx.cs">
+      <DependentUpon>ListaObjetivos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListaObjetivos.aspx.designer.cs">
+      <DependentUpon>ListaObjetivos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MetasNacionales.aspx.cs">
+      <DependentUpon>MetasNacionales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MetasNacionales.aspx.designer.cs">
+      <DependentUpon>MetasNacionales.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MIR.aspx.cs">
+      <DependentUpon>MIR.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MIR.aspx.designer.cs">
+      <DependentUpon>MIR.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\Busqueda.cs" />
+    <Compile Include="Modelo\Ciclo.cs" />
+    <Compile Include="Modelo\ComponenteRamo33.cs" />
+    <Compile Include="Modelo\Contador.cs" />
+    <Compile Include="Modelo\ContadorIndObj4T.cs" />
+    <Compile Include="Modelo\ContadorIndObj.cs" />
+    <Compile Include="Modelo\DerechoSocialInd.cs" />
+    <Compile Include="Modelo\DetalleIndicadorMeta.cs" />
+    <Compile Include="Modelo\DetalleIndicadorRamo33.cs" />
+    <Compile Include="Modelo\EstadisticasBasicas.cs" />
+    <Compile Include="Modelo\Derecho.cs" />
+    <Compile Include="Modelo\FichaMonitoreo.cs" />
+    <Compile Include="Modelo\FondoMatrizComponente.cs" />
+    <Compile Include="Modelo\FondoRamo33.cs" />
+    <Compile Include="Modelo\FrecuanciaMedicion.cs" />
+    <Compile Include="Modelo\HistoricoIndicador.cs" />
+    <Compile Include="Modelo\IndcadorSectorial4T.cs" />
+    <Compile Include="Modelo\IndcadorSectorial.cs" />
+    <Compile Include="Modelo\Indicador.cs" />
+    <Compile Include="Modelo\IndicadoresPND.cs" />
+    <Compile Include="Modelo\IndicadoresTrans.cs" />
+    <Compile Include="Modelo\IndicadorMapaR33.cs" />
+    <Compile Include="Modelo\IndicadorRamo33.cs" />
+    <Compile Include="Modelo\MatrizRamo33.cs" />
+    <Compile Include="Modelo\Meta.cs" />
+    <Compile Include="Modelo\MetasNac.cs" />
+    <Compile Include="Modelo\MetasNacionales.cs" />
+    <Compile Include="Modelo\Mosaico.cs" />
+    <Compile Include="Modelo\MosaicoFin.cs" />
+    <Compile Include="Modelo\MosaicoFondoRamo33.cs" />
+    <Compile Include="Modelo\Objetivo.cs" />
+    <Compile Include="Modelo\ObjetivoNacional.cs" />
+    <Compile Include="Modelo\ObjetivoSectorial4T.cs" />
+    <Compile Include="Modelo\ObjetivoSectorial.cs" />
+    <Compile Include="Modelo\ObjetivosM.cs" />
+    <Compile Include="Modelo\Parametro.cs" />
+    <Compile Include="Modelo\Presupuesto.cs" />
+    <Compile Include="Modelo\Programa.cs" />
+    <Compile Include="Modelo\ProgramaFin.cs" />
+    <Compile Include="Modelo\ProgramaIndicadorMIR.cs" />
+    <Compile Include="Modelo\ProgramaSectorial4T.cs" />
+    <Compile Include="Modelo\ProgramaSectorial.cs" />
+    <Compile Include="Modelo\Sector.cs" />
+    <Compile Include="Modelo\Supuesto.cs" />
+    <Compile Include="Modelo\TipoReporte.cs" />
+    <Compile Include="Modelo\TotalIndicador.cs" />
+    <Compile Include="Modelo\UnidadMedida.cs" />
+    <Compile Include="Modelo\ValoDesepenoRamo33.cs" />
+    <Compile Include="Modelo\Valoracion.cs" />
+    <Compile Include="Modelo\VariableIndicador.cs" />
+    <Compile Include="BDIndicadoresPrograma.aspx.cs">
+      <DependentUpon>BDIndicadoresPrograma.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BDIndicadoresPrograma.aspx.designer.cs">
+      <DependentUpon>BDIndicadoresPrograma.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FichaIndicadores.aspx.cs">
+      <DependentUpon>FichaIndicadores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FichaIndicadores.aspx.designer.cs">
+      <DependentUpon>FichaIndicadores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Monitoreo.aspx.cs">
+      <DependentUpon>Monitoreo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Monitoreo.aspx.designer.cs">
+      <DependentUpon>Monitoreo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MoreLinq\MoreEnumerable.DistinctBy.cs" />
+    <Compile Include="MosaicoFin.aspx.cs">
+      <DependentUpon>MosaicoFin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MosaicoFin.aspx.designer.cs">
+      <DependentUpon>MosaicoFin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MosaicoRamo33.aspx.cs">
+      <DependentUpon>MosaicoRamo33.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MosaicoRamo33.aspx.designer.cs">
+      <DependentUpon>MosaicoRamo33.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MosaicoSectores19-24.aspx.cs">
+      <DependentUpon>MosaicoSectores19-24.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MosaicoSectores19-24.aspx.designer.cs">
+      <DependentUpon>MosaicoSectores19-24.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MosaicoSectores.aspx.cs">
+      <DependentUpon>MosaicoSectores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MosaicoSectores.aspx.designer.cs">
+      <DependentUpon>MosaicoSectores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MosaicoSipol.aspx.cs">
+      <DependentUpon>MosaicoSipol.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MosaicoSipol.aspx.designer.cs">
+      <DependentUpon>MosaicoSipol.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MosaicoSips.aspx.cs">
+      <DependentUpon>MosaicoSips.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MosaicoSips.aspx.designer.cs">
+      <DependentUpon>MosaicoSips.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Programa.aspx.cs">
+      <DependentUpon>Programa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Programa.aspx.designer.cs">
+      <DependentUpon>Programa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProgramaFin.aspx.cs">
+      <DependentUpon>ProgramaFin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProgramaFin.aspx.designer.cs">
+      <DependentUpon>ProgramaFin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Programas.aspx.cs">
+      <DependentUpon>Programas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Programas.aspx.designer.cs">
+      <DependentUpon>Programas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Log\DescargaAppLog" />
+    <Content Include="bin\EntityFramework.dll.refresh" />
+    <Content Include="bin\EntityFramework.SqlServer.dll.refresh" />
+    <Content Include="packages.config" />
+    <Content Include="Site.Master" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\PAEMIR.pubxml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\PublishProfiles\SIMEPS.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <Content Include="web.sitemap">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel1">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\clienteSIID\clienteSIID.csproj">
+      <Project>{67a335a6-a471-4508-afd8-18304655c870}</Project>
+      <Name>clienteSIID</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>63236</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:64998/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <servers defaultServer="SelfHostServer">
+            <server name="SelfHostServer" exePath="" cmdArgs="" url="http://localhost:63236/" workingDir="" />
+          </servers>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

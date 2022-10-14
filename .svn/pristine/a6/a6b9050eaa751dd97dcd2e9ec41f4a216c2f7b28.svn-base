@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+Este archivo es utilizado por el proceso de paquete/publicación de nuestro proyecto Web. Puede personalizar el comportamiento de este proceso
+editando este archivo MSBuild. Para conocer más acerca de esto, visite http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <WebPublishMethod>MSDeploy</WebPublishMethod>
+    <ADUsesOwinOrOpenIdConnect>False</ADUsesOwinOrOpenIdConnect>
+    <LastUsedBuildConfiguration>Release</LastUsedBuildConfiguration>
+    <LastUsedPlatform>Any CPU</LastUsedPlatform>
+    <SiteUrlToLaunchAfterPublish>http://localhost:81/PAEMIR</SiteUrlToLaunchAfterPublish>
+    <LaunchSiteAfterPublish>True</LaunchSiteAfterPublish>
+    <ExcludeApp_Data>False</ExcludeApp_Data>
+    <MSDeployServiceURL>LENOVO-PC</MSDeployServiceURL>
+    <DeployIisAppPath>SIMEPS/SIMEPS</DeployIisAppPath>
+    <RemoteSitePhysicalPath />
+    <SkipExtraFilesOnServer>False</SkipExtraFilesOnServer>
+    <MSDeployPublishMethod>WMSVC</MSDeployPublishMethod>
+    <EnableMSDeployBackup>False</EnableMSDeployBackup>
+    <UserName />
+    <_SavePWD>False</_SavePWD>
+    <PublishDatabaseSettings>
+      <Objects xmlns="">
+        <ObjectGroup Name="inventarioDBEntities" Order="2" Enabled="False">
+          <Destination Path="" />
+          <Object Type="DbDacFx">
+            <PreSource Path="Data Source=DESKTOP-FF5M9LA\ECLIPSE;Initial Catalog=inventarioDB;Integrated Security=True;Application Name=EntityFramework" includeData="False" />
+            <Source Path="$(IntermediateOutputPath)AutoScripts\inventarioDBEntities_IncrementalSchemaOnly.dacpac" dacpacAction="Deploy" />
+          </Object>
+          <UpdateFrom Type="Web.Config">
+            <Source MatchValue="metadata=res://*/EF.InventariosModel.csdl|res://*/EF.InventariosModel.ssdl|res://*/EF.InventariosModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=DESKTOP-FF5M9LA\ECLIPSE;initial catalog=inventarioDB;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" MatchAttributes="$(UpdateFromConnectionStringAttributes)" />
+          </UpdateFrom>
+        </ObjectGroup>
+        <ObjectGroup Name="Entities" Order="3" Enabled="False">
+          <Destination Path="" />
+          <Object Type="DbDacFx">
+            <PreSource Path="Data Source=DESKTOP-FF5M9LA\ECLIPSE;Initial Catalog=mirDB;Integrated Security=True;Application Name=EntityFramework" includeData="False" />
+            <Source Path="$(IntermediateOutputPath)AutoScripts\Entities_IncrementalSchemaOnly.dacpac" dacpacAction="Deploy" />
+          </Object>
+          <UpdateFrom Type="Web.Config">
+            <Source MatchValue="metadata=res://*/EF.ConevalModel.csdl|res://*/EF.ConevalModel.ssdl|res://*/EF.ConevalModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=DESKTOP-FF5M9LA\ECLIPSE;initial catalog=mirDB;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" MatchAttributes="$(UpdateFromConnectionStringAttributes)" />
+          </UpdateFrom>
+        </ObjectGroup>
+      </Objects>
+    </PublishDatabaseSettings>
+    <PrecompileBeforePublish>True</PrecompileBeforePublish>
+    <EnableUpdateable>True</EnableUpdateable>
+    <DebugSymbols>False</DebugSymbols>
+    <WDPMergeOption>DonotMerge</WDPMergeOption>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,163 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="IndicadorSectorial.aspx.cs" Inherits="SIMEPS.IndicadorSectorial" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+   <div class="borderedFrame" onload="Page_Load">
+      <br />
+      <div class="row">
+         <div class="col-sm-2">
+         </div>
+         <div class="col-sm-4">
+            <p class="text-center">
+               <a class="btn btn-success btn-sistemas" style="min-height:30px !important;width:100%;" href="Home.aspx">Inicio</a>
+            </p>
+         </div>
+         <div class="col-sm-4">
+            <p class="text-center">
+               <a class="btn btn-success btn-sistemas" style="min-height:30px !important;width:100%;" href="ListaObjetivos.aspx?id=<%=Request.Params["id"]%>">Ir a lista de objetivos</a>
+            </p>
+         </div>
+         <div class="col-sm-2">
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-md-12">
+            <asp:Repeater ID="rprObjetivosComp" runat="server" DataSourceID="odsMosaicos">
+               <ItemTemplate>
+                  <div class="row">
+                     <div class="col-sm-9" >
+                        <div class="row">
+                           <div class="col-sm-12">
+                              <br />
+                              <p class="TitulosObjetivosPND">
+                                 <span id="headerContent" style="font-size: 14pt;">Sistema de Indicadores de la Política Social</span>
+                              </p>
+                              <p class="TitulosObjetivosPND subMosaico">
+                                 <span>Indicadores derivados del PND y de Fin</span>
+                              </p>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-sm-12">
+                              <div><br />
+                                 <p class="TitulosObjetivosPND" style="color: #00a94f; font-family: arial;"><%#Eval("NOMBRE") %></p>
+                              </div>
+                              <hr style="border-bottom: 1px solid #d0cfcf;" />
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-sm-3">
+                        <div class="row">
+                           <br />
+                           <p class="text-center">
+                              <a href="MosaicoSipol.aspx">
+                                 <img src='<%#Eval("URL_ICONO") %>' alt="Responsive image" onerror="this.src='/SiteCollectionImages/Paemir/LogosDependencias/imgNoExist.png'" class="img-responsive" style="min-width: 170px; min-height: 140px; display: inline">
+                              </a>
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+               </ItemTemplate>
+            </asp:Repeater>
+         </div>
+      </div>
+
+      <div class="row">
+      <asp:Repeater ID="DetalleIndicador" runat="server" DataSourceID="Detalle">
+         <ItemTemplate>
+                <div class="col-lg-6">
+                    <p style="color:dimgray" class="borderParrafo1">Objetivo: <span class="textoIndicadores"><%#Eval("OBJETIVO")%></span></p>
+            
+                    <p style="color:deepskyblue"  class="borderParrafo2">Indicador: <span class="textoIndicadores"><%#Eval("NOMBRE")%></span></p>
+            
+                    <p style="color:darkblue" class="borderParrafo3">Descripción: <span class="textoIndicadores"><%#Eval("DESCRIPCION")%></span></p>
+            
+                    <p style="color:dodgerblue" class="borderParrafo4">Método de cálculo: <span class="textoIndicadores"><%#Eval("METODO")%></span></p>
+
+                    <p style="color:blue" class="borderParrafo5">Fuentes de Información: <span class="textoIndicadores"><%#Eval("FUENTE")%></span></p>
+                </div>
+                <div class="col-lg-6">
+                    <div id="divGrafIndicadorSectorial" style="width: 100%; height: 450px;"></div>
+                    <div>
+                        <div><p style="color:#39508A">Línea Base: <span runat="server" class="textoIndicadores"><%#Eval("VALOR_LB")%> </span></p></div>
+                        <div><p style="color:#39508A">Periodicidad: <span class="textoIndicadores"><%#Eval("PERIODICIDAD")%></span></p></div>
+                        <div><p style="color:#39508A">Unidad de medida: <span class="textoIndicadores"><%#Eval("UDM")%></span></p></div>
+                    </div>
+                </div>
+         </ItemTemplate>
+      </asp:Repeater>
+
+      </div>
+      <br />
+      <div id="divBotones" class="row">
+         <asp:Repeater ID="Repeater1" runat="server" DataSourceID="odsMosaicos">
+               <ItemTemplate>
+                  <div class="col-sm-4">
+                     <input id="LinkDescargaBaseDatos" type="submit" class="btn btn-primary botonDescarga-In text-center" value="Descarga la base de datos de los indicadores del  <%#Eval("NOMBRE") %>" onclick='fjsDetenerEvento(event); fjsDescargaBaseDatos(this);'/>
+                  </div>
+                  </ItemTemplate>
+            </asp:Repeater>
+         
+         <div class="col-sm-4">
+            <input id="LinkDescargaFTIndicador" type="submit" class="btn btn-primary botonDescarga-In text-center" value="Descarga la ficha técnica del indicador" onclick='fjsDetenerEvento(event); fjsDescargaFTIndicador(this);'/>
+         </div>
+         <div class="col-sm-4">
+            <input id="LinkDescargaFTIndicadores" type="submit" class="btn btn-primary botonDescarga-In text-center" value="Descarga las fichas técnicas de los indicadores" onclick='fjsDetenerEvento(event); fjsDescargaFTIndicadores(this);'/>
+         </div>
+      </div>
+      <br />
+      <div class="lineaSeparacion"></div>
+        <div class="row borderParrafo">
+            <h2 class="TitulosObjetivos">
+            <p class="tituloProgramas">Programas y acciones sociales vinculados en 2016</p>
+            </h2>
+           <p class="textoIndicadores leyenda text-justify">A continuación se presentan los programas y acciones sociales cuyo nivel de Fin se encuentra asociado al presente indicador</p>
+            <table align="center" class="tblProgramasSectoriales">
+                <asp:Repeater ID="Repeater2" runat="server" DataSourceID="odsProgramaSectorial" >
+                    <ItemTemplate> 
+                        <tr>
+                            <td class="tdProgramasSectorialesPP">
+                                <strong style="color:white">
+                                    <%#Eval("PP")%>
+                                </strong>
+                            </td>
+                            <td class="tdProgramasSectoriales">
+                                <strong class="strgProgramasSectoriales">
+                                     <a href="<%#Eval("LIGA")%>" style="color: white;cursor: pointer;"><%#Eval("NOMBRE")%></a>
+                                </strong>
+                            </td>
+                        </tr>                           
+                    </ItemTemplate>
+                </asp:Repeater>  
+            </table> 
+        </div>
+     </div>
+    <asp:ObjectDataSource ID="odsMosaicos" runat="server" TypeName="SIMEPS.Dal.IndicadoresDal" SelectMethod="ConsultarProgramaSectoriales">
+        <SelectParameters>
+            <asp:QueryStringParameter Name="idProgramaSectorial" QueryStringField="id" DefaultValue="0" />
+        </SelectParameters>
+    </asp:ObjectDataSource>
+
+    <asp:ObjectDataSource ID="Detalle" runat="server" TypeName="SIMEPS.Dal.IndicadoresDal" SelectMethod="ConsultarDetalleIndicador">
+        <SelectParameters>
+            <asp:QueryStringParameter Name="idIndicador" QueryStringField="idIndicador" DefaultValue="-1" />
+            <asp:Parameter Name="opcion" DefaultValue="1" />
+        </SelectParameters>
+    </asp:ObjectDataSource>
+
+    <asp:DropDownList ID="ddlHistoricoMetas" runat="server" CssClass="select" DataSourceID="odsGraficaHistoricoMetas" DataTextField="METASHISTORICO" DataValueField="CICLO" Style="display:none">
+		  </asp:DropDownList>
+
+    <asp:ObjectDataSource ID="odsGraficaHistoricoMetas" runat="server" TypeName="SIMEPS.Dal.IndicadoresDal" SelectMethod="ConsultarMetasIndicador">
+        <SelectParameters>
+            <asp:QueryStringParameter Name="idIndicador" QueryStringField="idIndicador" DefaultValue="-1" />
+            <asp:Parameter Name="opcion" DefaultValue="2" />
+        </SelectParameters>
+    </asp:ObjectDataSource>
+    <asp:ObjectDataSource ID="odsProgramaSectorial" runat="server" TypeName="SIMEPS.Dal.IndicadoresDal" SelectMethod="ConcultarProgramaIndicador" >
+        <selectparameters>
+            <asp:QueryStringParameter Name="idIndicador" QueryStringField="idIndicador" DefaultValue="-1" />                                
+        </selectparameters>
+    </asp:ObjectDataSource>
+</asp:Content>

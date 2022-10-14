@@ -1,0 +1,631 @@
+/*creado por :AJS Fecha: 17/05/2016 
+  Obtener los par醡etros de la URL
+  name = nombre del par醡ertro.
+  url = string donde se encuentre el par醡etro que se dea buscar
+*/
+function getParameterUrl(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+/*
+creado por: AJS Fecha: 25/04/2016
+Objetivo: Elimina los estilo de la p醙ina para que se abra de forma correcta en el dialog
+*/
+function removeStyleDialog() 
+{
+	var descargaIndicador = document.getElementById("linkDescargaFichaTecnica");
+	var linkDescargaBaseIndicadores = document.getElementById("linkDescargaBaseIndicadores");
+	var linkDescargaRepMonitoreo = document.getElementById("linkDescargaRepMonitoreo");
+	if(descargaIndicador != null)
+		descargaIndicador.style.display = "none";  		
+
+	if(linkDescargaBaseIndicadores != null)
+		linkDescargaBaseIndicadores .style.display = "none";		        
+	if (linkDescargaRepMonitoreo != null)
+	    linkDescargaRepMonitoreo.style.display = "none";
+}
+
+/*
+creado por: AJS Fecha: 20/07/2015
+Objetivo: cuando se presiona ENTER en la busqueda por indicadores realiza el filtrado de la misma
+*/
+function EnterEvent(e) {
+        if (e.keyCode == 13) {
+			fjsUpdatePanel();
+        }
+    }
+/*
+creado por: AJS Fecha: 08/07/2015
+Objetivo: Obtiene el texto del input oculto y pasa el valor a la caja de texto principal.
+*/
+function fjsPassValue()
+{
+	var valorText = document.getElementById("ctl00_PlaceHolderMain_texBuscador").value;
+	document.getElementById("ctl00_PlaceHolderMain_texBuscaURL").value = valorText;
+}
+/*
+creado por: AJS Fecha: 08/07/2015
+Objetivo: Realiza una actualizaci髇 del panel
+*/
+
+function fjsUpdatePanel()
+{
+	document.getElementById("ctl00_PlaceHolderMain_BtnSubmit").click();
+}
+/*
+creado por: AJS Fecha: 08/07/2015
+Objetivo: Obtiene el texto de la URL y lo almacena en la caja de texto.
+*/
+
+function fjsSetValue()
+{
+	var txt = 	document.getElementById("ctl00_PlaceHolderMain_texBuscador").value;
+	if(txt  == '')
+	{		
+		var sUrl = location.toString();
+		var valor =	fjsRecuperaParametroPae(sUrl,'txtBuscador');	
+		document.getElementById("ctl00_PlaceHolderMain_texBuscaURL").value = valor;
+		document.getElementById("ctl00_PlaceHolderMain_texBuscador").value = valor;	
+	}			
+}
+
+/*
+creado por: AJS Fecha: 08/07/2015
+Objetivo: Pasa el texto ingresado por el usuario como par醡etro en la URI
+*/
+function fjsBuscaIndicador()
+{	
+	var textBuscador = document.getElementById("ctl00_PlaceHolderMain_texBuscador").value;  
+	if(textBuscador != '')
+	{
+		location.href = 'BuscaIndicador.aspx?txtBuscador='+textBuscador;
+	}
+}
+/*
+creado por: AJS Fecha: 08/07/2015
+Objetivo: Valida que la gr醘ica en el detalle del Indicador contenga al menos un registro, caso contrario muestra una leyenda
+*/
+function fjsVerificaDivInfo()
+{
+ var menu = document.getElementById("ctl00_PlaceHolderMain_ddlGraficaInd");
+	if(menu.options.length < 0) {	 
+	    document.getElementById("divSinInformacion").style.display = '';    
+	} 
+}
+
+
+/*
+Objetivo: Valida que se haya seleccionado un anio y si es el caso ejecutar la consulta para los mosaicos
+Par谩metros: bPostBack: Indicador Verdadero si es la segunda vez o n que se ejecuta el viaje al servidor
+*/
+function fjsValidaAnio(bPostBack) {
+   var ddlAnio = document.getElementById('ctl00_PlaceHolderMain_ddlAnio');
+   fjsBloquearPantalla("Cargando...");
+   if (ddlAnio && ddlAnio.length < 1) {
+      document.getElementById('divMosaico').style.display = 'none';
+      return false;
+   }
+   else {
+      var txtAnioSelected = document.getElementById('txtAnioSelected');      
+      var anioTxt = '';
+      if(txtAnioSelected && txtAnioSelected.value != '')
+         anioTxt = txtAnioSelected.value;
+      
+   	if(!bPostBack)
+   		fjsInicializaAnio(ddlAnio,anioTxt);
+   	
+   	//Prepara la funci贸n para que ejecute el pintado del Mosaico despues de ejecutar el __DoPostBack
+      var requestManager = Sys.WebForms.PageRequestManager.getInstance();
+
+      function EndRequestHandler(sender, args) {    		
+         fjsCargarMosaico(ddlAnio);   		
+   		requestManager.remove_endRequest(EndRequestHandler);
+         fjsDesbloquearPantalla();         
+         
+      }
+      requestManager.add_endRequest(EndRequestHandler);      
+
+      if (!bPostBack)
+           __doPostBack(ddlAnio.id, '');
+   }      
+}
+
+/*
+ *Asigna el a帽o actual en el ddl de anio cuando se carga la pagina por primera vez
+ */
+function fjsInicializaAnio(control, anioCache) {   
+   var fecha = new Date();
+	var anio = fecha.getFullYear();
+
+   if(anioCache != '')
+      anio = anioCache;
+   
+	for (var i = 0; i < control.options.length; i++) {      
+		if(control.options[i].value == anio) {
+			control.options[i].selected = true;                  
+			 break;
+		} else
+      control.options[control.options.length-1].selected = true;                  
+	}      
+}
+
+/*Bloquea la pantalla para que no sea posible modificar nada por los usuarios*/
+function fjsBloquearPantalla(str) {
+   scroll(0, 0);
+   var back = document.getElementById('skm_LockBackground');
+   var pane = document.getElementById('skm_LockPane');
+   var text = document.getElementById('skm_LockPaneText');
+
+   if (back) { back.className = 'LockBackground'; back.style.display = 'block';}
+   if (pane) { pane.className = 'LockPane'; pane.style.display = 'block';}
+   if (text) text.innerHTML = str;
+}
+
+/* Desbloquea la pantalla */
+function fjsDesbloquearPantalla() {
+   scroll(0, 0);
+   var back = document.getElementById('skm_LockBackground');
+   var pane = document.getElementById('skm_LockPane');
+   var text = document.getElementById('skm_LockPaneText');
+
+   if (back) { back.className = 'LockOff'; back.style.display = 'none';}
+   if (pane) { pane.className = 'LockOff'; pane.style.display = 'none';}
+}
+
+function fjsObtenerAnioSelected(ddlAnio) {
+	if(ddlAnio){
+      var txtAnioSelected = document.getElementById('txtAnioSelected');    
+      if(txtAnioSelected)
+         txtAnioSelected.value = ddlAnio.options[ddlAnio.selectedIndex].value;
+		return ddlAnio.options[ddlAnio.selectedIndex].value;
+   }
+	return "-1";
+}
+
+function fjsObtenerRamo(ramoUnidad){
+	var ramo = 0;
+	if(ramoUnidad.length > 0){
+		ramo = ramoUnidad.split('-')[0];	
+		if (ramo.indexOf('.') > -1) 
+			ramo = ramo.substring(0, ramo.indexOf('.'));
+	}
+	return ramo;	
+}
+
+function fjsObtenerUnidad(ramoUnidad){
+	var unidad = 0;
+	if(ramoUnidad.length > 0){
+		unidad = ramoUnidad.split('-')[1];	
+
+		if (!unidad )
+			unidad = ramoUnidad.split('-')[0];
+
+		if (unidad.indexOf('.') > -1) 
+			unidad = unidad.substring(0, unidad.indexOf('.'));
+	}
+	return unidad;	
+}
+
+/*Objetivo: Cargar los componentes necesarios para la correcta visualizaci贸n de la informaci贸n del mosaico seleccionado*/
+function fjsCargarProgramas() {  
+   setTimeout(function(){fjsDesbloquearPantalla();},200);
+ /*alert("Cargando lista de programas");*/
+}
+
+/*Objetivo: Cargar los componentes necesarios para la correcta visualizaci贸n de la informaci贸n de un programa seleccionado*/
+function fjsCargaPrograma(){
+   fjsAsignarNombrePrograma();
+   fjsCargarGraficaIndicadores('ddlGraficaProp');
+   fjsCargarGraficaIndicadores('ddlGraficaComp');
+}
+
+function fjsCargaIndicadores(){   
+   var spnIndProp = document.getElementById('spnIndProposito');   
+   var spnIndComp = document.getElementById('spnIndComponente');
+   var ddlIndProp = document.getElementById('ctl00_PlaceHolderMain_ddlIndProp');
+   var ddlIndComp = document.getElementById('ctl00_PlaceHolderMain_ddlIndComp');
+   if(spnIndProp && ddlIndProp && ddlIndProp.length > 0)
+      spnIndProp.innerHTML = ddlIndProp.options[ddlIndProp.selectedIndex].text;
+   if(spnIndComp && ddlIndComp && ddlIndComp.length > 0)
+      spnIndComp.innerHTML = ddlIndComp.options[ddlIndComp.selectedIndex].text;
+
+}
+
+function fjsAsignarNombrePrograma(){
+   var spnNomProg = document.getElementById('spnNombrePrograma');   
+   var sUrl = location.toString();
+   spnNomProg.innerHTML =  fjsRecuperaParametroPae(sUrl,'pPrograma');
+
+}
+
+/*Objetivo: Recupera el valor del parametro especificado*/
+function fjsRecuperaParametroPae(sUrl, sParam) {
+   var sValor = '';
+   sValor = getParameterUrl(sParam, sUrl);
+   return sValor;
+}
+
+function fjsCargarGraficaIndicadores(ddlPattern){
+   var colSelect = document.getElementsByTagName('select');
+   for (var iIndex = 0; iIndex < colSelect.length; iIndex++) {
+      if ((colSelect[iIndex].id+'X').indexOf(ddlPattern) > -1)
+         fjsGraficarIndicador(colSelect[iIndex],false);
+      
+   }
+}
+
+function fjsGraficarIndicador(ddl,showScroll){
+   if(ddl.length > 0){
+    var valueJson = ddl.options[0].text;
+    if(valueJson  && valueJson.length >0){
+      valueJson = valueJson.split(',')[0];
+      //alert(valueJson);
+      if(valueJson.indexOf(':"') >-1){
+        valueJson = valueJson.substring(valueJson.indexOf(':"')+2,valueJson.length-1);     
+        //alert(valueJson); 
+      }
+      var idDivGrafica =valueJson;
+      if(idDivGrafica && idDivGrafica != '') {
+        var chartDataDer = fjsGeneraArregloGrafica(ddl);
+        fjsGeneraHistogramaComparativa(chartDataDer, 'ciclo', 'MetaPlaneada','MetaAlcanzada', idDivGrafica, 'Hist贸rico (Gr谩fica Lineal)',showScroll);
+        //for (var i = 0; i < ddl.options.length; i++) {
+        //}
+      }  
+    }    
+  }
+}
+
+function fjsGraficaIndicador(){
+     //Prepara la funci贸n para que ejecute el pintado de la tabla despues de ejecutar el __DoPostBack
+      //var requestManager = Sys.WebForms.PageRequestManager.getInstance();
+
+    //  function EndRequestHandler(sender, args) {
+
+         fjsBloquearPantalla("Cargando...");       
+         //Construye la grafica de barras de indicadores
+         var chartDataDer = fjsGeneraArregloGrafica(document.getElementById('ctl00_PlaceHolderMain_ddlGrafica'));
+         fjsGeneraHistogramaComparativa(chartDataDer, 'ciclo', 'MetaPlaneada','MetaAlcanzada', 'chartInd', 'Hist贸rico',true);
+   
+         fjsDesbloquearPantalla();
+
+        // requestManager.remove_endRequest(EndRequestHandler);
+      //}
+      //requestManager.add_endRequest(EndRequestHandler);
+}
+
+/*
+Objetivo: Generar el arreglo con los datos que deber谩n de mostrarse en la gr谩fica
+Par谩metros: ddl: control DropDownList donde se ejecut贸 la consulta
+*/
+function fjsGeneraArregloGrafica(ddl) {
+   var chartData = new Array(0);
+   var aColors = new Array(0);
+   for (var iIndex = 0; iIndex < ddl.options.length; iIndex++)
+      chartData.push(eval('(' + ddl.options[iIndex].text + ')'));
+   return chartData;
+}
+
+function fjsCargaDetalleIndicador(){
+  fjsBloquearPantalla("Cargando...");
+  var nivelConsultado = fjsRecuperaParametroPae(location.href,'pNivel');
+  var spnNivelSeleccionado = document.getElementById('spnTituloIndicador');
+  if(spnNivelSeleccionado){
+      var sHTML = '<table style="width: 100%;"><tr><td ';      
+      sHTML += nivelConsultado == 2 ? ' class="headerProposito headerTituloNivel" ' : (nivelConsultado == 3 ? ' class="headerComponente headerTituloNivel" ' : '');
+      sHTML +='>';
+      sHTML += nivelConsultado == 2 ? 'Indicador del objetivo del programa' : (nivelConsultado == 3 ? 'Indicador del Apoyo del programa (Componente)' : '');
+      sHTML += '</td></tr>';
+      spnNivelSeleccionado.innerHTML = sHTML;
+  }
+  fjsDibujarGraficaInd('lineal','divGrafica');
+  fjsDesbloquearPantalla();
+ 
+}
+
+function fjsDibujarGraficaInd(tipo,divToPrintChart){
+    var chartDataDer = fjsGeneraArregloGrafica(document.getElementById('ContentPlaceHolder1_ddlGraficaInd'));
+  if(tipo == 'barra')      
+         fjsGeneraBarraComparativa(chartDataDer, 'ciclo', 'MetaPlaneada','MetaAlcanzada', divToPrintChart, 'Hist贸rico (Gr谩fica de Barras)');
+  if(tipo == 'lineal')
+        fjsGeneraHistogramaComparativa(chartDataDer, 'ciclo', 'MetaPlaneada','MetaAlcanzada', divToPrintChart, 'Hist贸rico (Gr谩fica Lineal)',true);
+}
+
+function fjsMostrarGrafica(tipo){
+  var lineal = document.getElementById('divGrafica');
+  if(lineal){
+    lineal.innerHTML = '';
+    fjsDibujarGraficaInd(tipo,'divGrafica');
+  }  
+}
+
+/*TOOD: ELiminar si ya no se ocupa*/
+function fjsCargarTablaIndicadorHist(){
+  var ddl = document.getElementById('ctl00_PlaceHolderMain_ddlIndicadorHist');
+  var divIndHist = document.getElementById('divTablaIndicadorHist');
+  var sHTML = '';
+  if(ddl){
+    for (var iIndex = 0; iIndex < ddl.options.length; iIndex++)
+      sHTML += ddl.options[iIndex].text;
+  divIndHist.innerHTML = sHTML;  
+  }
+}
+
+function fjsExcelReport(tabla,nombreArchivo)
+  {
+    var tab_text="<table border='2px'><tr style='background:#1886F0'><td>";
+    var textRange; var j=0;
+    
+    tab = document.getElementById(tabla); // id of table
+    for(j = 0 ; j < tab.rows.length ; j++)     
+      {                     
+          //tab_text += "<tr><td>";
+          if(j != 0)
+            tab_text +='<tr><td>';
+          tab_text += tab.rows[j].innerHTML+"</td></tr>";
+          //tab_text=tab_text+"</tr>";
+      }
+
+      tab_text=tab_text+"</table>";
+      //tab_text= tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+      //tab_text= tab_text.replace(/<img[^>]*>/gi,""); // remove if u want images in your table
+      //tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+      var ua = window.navigator.userAgent;
+      var msie = ua.indexOf("MSIE "); 
+
+      if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+        {
+          txtArea1.document.open("txt/html","replace");
+          txtArea1.document.write(tab_text);
+          txtArea1.document.close();
+          txtArea1.focus(); 
+          sa=txtArea1.document.execCommand("SaveAs",true,"HistoricoIndicador.xls");
+        }  
+      else                 //other browser not tested on IE 11
+        sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));  
+    return (sa);
+  }
+/*
+function fjsMuestraPrograma(idMatriz,unidad,nomProgrma){
+  var href =  "/Evaluacion/Paginas/paemir/Programa.aspx?pIdMatriz="+idMatriz+"&pUnidad="unidad+"&pPrograma="+nomProgrma;
+  return href;
+}*/
+
+
+//Objetivo: Env铆颅a los par谩mtros requeridos del reporte con los criterios seleccionados
+function fjsAplicaFiltros() {
+   //var sPrefijoFiltro = 'ctl00_PlaceHolderMain_';
+   //var sPrefijoReporte='ctl00_m_g_a408b807_9dc3_4100_ba06_53dbc69584ce_ctl00_ctl17_ctl06_';
+   var iIndex = -1;
+   var inputs = document.getElementsByTagName('input');
+   var fIni = -1; //Rango Inicial
+   var fFin = -1; //Rango final
+   var sUrl = location.toString();
+   fjsBloquearPantalla('Cargando...');
+   for (i = 0; i < inputs.length; i++) {
+      if (inputs[i].type == 'text' && (inputs[i].id + 'X').indexOf('ReportViewer') == -1 && (inputs[i].id + 'X').indexOf('txtValue') > -1) {        
+        iIndex++;
+        inputs[i].value = fjsRecuperaParametroPae(sUrl,'pIdIndicador');
+      }
+      else if (inputs[i].type == 'submit' && (inputs[i].value + 'X').indexOf('View Report') > -1) {
+         //Prepara la funci贸n para que ejecute el pintado de la tabla despues de ejecutar el __DoPostBack
+         var requestManager = Sys.WebForms.PageRequestManager.getInstance();
+
+         function EndRequestHandler(sender, args) {
+            fjsOcultaParametros();
+
+            fjsDesbloquearPantalla();
+            requestManager.remove_endRequest(EndRequestHandler);
+         }
+         requestManager.add_endRequest(EndRequestHandler);
+         inputs[i].click();
+         document.getElementById('divReporte').style.left = '0px';
+      }
+     }
+   }
+
+function fjsOcultaParametros() {
+  var divs = document.getElementsByTagName('div');
+    for (var i = 0; i < divs.length; i++) {
+      if ((divs[i].id + 'X').indexOf('ctl01_ToggleParam') > -1) {
+         divs[i].parentElement.parentElement.style.display = 'none';
+         //divs[i].style.color="white";
+         break;
+         // alert(divs[i].id);
+      }
+   }
+}
+
+
+function mostrarPrograma(url) {
+    var sUrl = location.toString();
+    var parametroCiclo = fjsRecuperaParametroPae(sUrl, 'ciclo');
+    var parametroRamo = fjsRecuperaParametroPae(sUrl, 'ramo');
+    window.location = url + '&pCiclo=' + parametroCiclo + '&pRamo=' + parametroRamo;
+}
+
+/*
+creado por: JPL Fecha: 16/06/2016
+Objetivo: Agrega los parametros necesarios para poder realizar la descarga de el excel de Ficha de indicadores
+*/
+function fjsDescargaFichaIndicadores(link, indicador) {
+    fjsBlockUIForDownload(link);
+    var sUrl = location.toString();
+    var sUrlDescarga = "";
+    var parametroMatriz = fjsRecuperaParametroPae(sUrl, 'pIdMatriz');
+    var parametroCiclo = fjsRecuperaParametroPae(sUrl, 'pCiclo');
+    var parametroRamo = fjsRecuperaParametroPae(sUrl, 'pRamo');
+
+    if (indicador) {
+        var parametroIndicador = fjsRecuperaParametroPae(sUrl, 'pIdIndicador');
+        var parametroNivel = fjsRecuperaParametroPae(sUrl, 'pNivel');
+        sUrlDescarga = "FichaIndicadores.aspx" + "?pIdMatriz=" + parametroMatriz + "&pCiclo=" + parametroCiclo + "&pRamo=" + parametroRamo + '&pIdIndicador=' + parametroIndicador + '&pNivel=' + parametroNivel;
+    } else {
+        sUrlDescarga = "FichaIndicadores.aspx" + "?pIdMatriz=" + parametroMatriz + "&pCiclo=" + parametroCiclo + "&pRamo=" + parametroRamo;
+    }
+
+    window.location = sUrlDescarga;
+
+}
+
+/*
+creado por: JPL Fecha: 16/06/2016
+Objetivo: Agrega los parametros necesarios para poder realizar la descarga de el excel de Reporte de monitoreo
+*/
+function fjsDescargaRepMonitoreo(link, indicador) {
+    fjsBlockUIForDownload(link);
+    var sUrl = location.toString();
+    var sUrlDescarga = "";
+    var parametroMatriz = fjsRecuperaParametroPae(sUrl, 'pIdMatriz');
+    var parametroCiclo = fjsRecuperaParametroPae(sUrl, 'pCiclo');
+    var parametroRamo = fjsRecuperaParametroPae(sUrl, 'pRamo');
+
+    if (indicador) {
+        var parametroIndicador = fjsRecuperaParametroPae(sUrl, 'pIdIndicador');
+        var parametroNivel = fjsRecuperaParametroPae(sUrl, 'pNivel');
+        sUrlDescarga = "Monitoreo.aspx" + "?pIdMatriz=" + parametroMatriz + "&pCiclo=" + parametroCiclo + "&pRamo=" + parametroRamo + '&pIdIndicador=' + parametroIndicador + '&pNivel=' + parametroNivel;
+    } else {
+        sUrlDescarga = "Monitoreo.aspx" + "?pIdMatriz=" + parametroMatriz + "&pCiclo=" + parametroCiclo + "&pRamo=" + parametroRamo;
+    }
+    window.location = sUrlDescarga;
+}
+
+/*
+creado por: JPL Fecha: 16/06/2016
+Objetivo: Agrega los parametros necesarios para entrar a la pantalla que muestra el detalle del indicador.
+*/
+function mostrarIndicador(url) {
+    var sUrl = location.toString();
+    var parametroMatriz = fjsRecuperaParametroPae(sUrl, 'pIdMatriz');
+    var parametroCiclo = fjsRecuperaParametroPae(sUrl, 'pCiclo');
+    var parametroRamo = fjsRecuperaParametroPae(sUrl, 'pRamo');
+    var nuevoLink = document.createElement("a");
+    window.location = url + '&pIdMatriz=' + parametroMatriz + '&pCiclo=' + parametroCiclo + '&pRamo=' + parametroRamo;
+}
+
+/*
+creado por: JPL Fecha: 16/06/2016
+Objetivo: Agrega los parametros necesarios para poder realizar la descarga de el excel de Base de indicadores
+*/
+function fjsDescargaBaseIndicadores(link) {
+    fjsBlockUIForDownload(link);
+    var sUrl = location.toString();
+    var sUrlDescarga = "";
+    var parametroMatriz = fjsRecuperaParametroPae(sUrl, 'pIdMatriz');
+    var parametroCiclo = fjsRecuperaParametroPae(sUrl, 'pCiclo');
+    var parametroRamo = fjsRecuperaParametroPae(sUrl, 'pRamo');
+    sUrlDescarga = "BDIndicadoresProgramaRS.aspx" + "?pIdMatriz=" + parametroMatriz + "&pCiclo=" + parametroCiclo + "&pRamo=" + parametroRamo;
+    window.location = sUrlDescarga;
+}
+
+/*
+creado por: JPL Fecha: 16/06/2016
+Objetivo: Sirve para detener la ejecuci髇 normal del link y poder agregar los parametros a la url
+*/
+function fjsDetenerEvento(event){
+	event.preventDefault();
+}
+
+/*
+creado por: JPL Fecha: 16/06/2016
+Objetivo: Permite revisar si un archivo ya se ha descargado correctamente
+*/
+var fileDownloadCheckTimer;
+var listaBotones = "";
+
+/*
+creado por: JPL Fecha: 16/06/2016
+Objetivo: Obtiene el valor de una cookie pasando como parametro el nombre
+*/
+function fjsGetCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+/*
+creado por: JPL Fecha: 16/06/2016
+Objetivo: Permite establece el valor de una cookie pasando como parametro en nombre y el valor
+*/
+function fjsSetCookie(cname, cvalue) {
+    var d = new Date();
+    d.setTime(d.getTime());
+    document.cookie = cname + "=" + cvalue + ";path=/";
+}
+
+/*
+creado por: JPL Fecha: 16/06/2016
+Objetivo: Bloquea la pantalla mientras se realiza la descarga de un archivo
+*/
+function fjsBlockUIForDownload(link) {
+    if (navigator.cookieEnabled) {
+        fjsSetCookie("fileDownloadToken", "false");
+        //$('#descargaModal').modal('show');
+
+        var btnsDescarga = document.getElementById("divBotones").getElementsByTagName("input");
+        for (var i = 0; i < btnsDescarga.length; i++) {
+            btnsDescarga[i].disabled = true;
+            listaBotones = listaBotones + btnsDescarga[i].id + "=" + btnsDescarga[i].value + ",";
+        }
+
+        link.value = "Descargando archivo...";
+        fileDownloadCheckTimer = setInterval(function () {
+            var cookieValue = fjsGetCookie("fileDownloadToken");
+            if (cookieValue == "true") {
+                fjsFinishDownload();
+            }
+        }, 1000);
+    }
+}
+
+/*
+creado por: JPL Fecha: 16/06/2016
+Objetivo: Desbloquea y limpia la variable que realiza la consulta del valor de la cookie en intervalos de tiempo
+*/
+function fjsFinishDownload() {
+    window.clearInterval(fileDownloadCheckTimer);
+    //$('#descargaModal').modal('hide');
+
+    var btnsDescarga = document.getElementById("divBotones").getElementsByTagName("input");
+    for (var i = 0; i < btnsDescarga.length; i++) {
+        var textosBotones = listaBotones.split(",");
+        for (var j = 0; j < textosBotones.length; j++) {
+            if (textosBotones[j].split("=")[0] == btnsDescarga[i].id) {
+                btnsDescarga[i].value = textosBotones[j].split("=")[1];
+                break;
+            }
+        }
+
+        btnsDescarga[i].disabled = false;
+    }
+}
+/*
+Creado por: AJS Fecha: 31/05/2016
+Objetivo: Descarga el archivo de MIR 
+*/
+function fjsDescargaMIR(link) {
+    fjsBlockUIForDownload(link);
+    var sUrl = location.toString();
+    var sUrlDescarga = "";
+    var parametroMatriz = fjsRecuperaParametroPae(sUrl, 'pIdMatriz');
+    var parametroCiclo  = fjsRecuperaParametroPae(sUrl, 'pCiclo');
+    var parametroRamo   = fjsRecuperaParametroPae(sUrl, 'pRamo');
+
+    sUrlDescarga = "DescargaMIR.aspx" + "?pIdMatriz=" + parametroMatriz + "&pCiclo=" + parametroCiclo + "&pRamo=" + parametroRamo;
+    window.location = sUrlDescarga;
+}

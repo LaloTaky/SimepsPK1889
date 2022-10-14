@@ -1,0 +1,48 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="SIMEPS.Site" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>SIMEPS - Sistema de Medición de la Política Social</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+      <link href="<%:Page.ResolveUrl("~/Content/bootstrap.css") %>" rel="stylesheet" />
+      <link href="<%:Page.ResolveUrl("~/Content/bootstrap.min.css")%>" rel="stylesheet" />
+      <link href="<%:Page.ResolveUrl("~/Content/Simeps.css")%>" rel="stylesheet" />
+      
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <meta name="description" content="SIMEPS" />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>                         
+                <asp:ScriptReference Path="~/scripts/jquery-1.12.3.js" />
+                <asp:ScriptReference Path="~/scripts/jquery-1.12.3.min.js" />      
+                <asp:ScriptReference Path="~/scripts/bootstrap.min.js" />
+                <asp:ScriptReference Path="~/scripts/Graficas.js" />
+                <asp:ScriptReference Path="~/scripts/Simeps.js" />                 
+                <asp:ScriptReference Path="~/scripts/charts/amcharts.js" />             
+                <asp:ScriptReference Path="~/scripts/charts/pie.js" />                  
+                <asp:ScriptReference Path="~/scripts/charts/serial.js" />   
+                <asp:ScriptReference Path="~/scripts/iframeResizer.contentWindow.min.js" />                                                                                                  
+            </Scripts>
+        </asp:ScriptManager>   
+    <div id="cphDiv" style="width: 95%;  margin:0 auto;">        
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+    <!-- Modal -->
+    <div class="modal fade" id="descargaModal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+      <div class="modal-dialog" role="document">
+          <div style="padding:30%">
+             <div class='uil-default-css' style='transform:scale(0.2);'><div style='top:80px;left:93px;width:14px;height:40px;background:#ffffff;-webkit-transform:rotate(0deg) translate(0,-60px);transform:rotate(0deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#ffffff;-webkit-transform:rotate(30deg) translate(0,-60px);transform:rotate(30deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#ffffff;-webkit-transform:rotate(60deg) translate(0,-60px);transform:rotate(60deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#ffffff;-webkit-transform:rotate(90deg) translate(0,-60px);transform:rotate(90deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#ffffff;-webkit-transform:rotate(120deg) translate(0,-60px);transform:rotate(120deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#ffffff;-webkit-transform:rotate(150deg) translate(0,-60px);transform:rotate(150deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#ffffff;-webkit-transform:rotate(180deg) translate(0,-60px);transform:rotate(180deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#ffffff;-webkit-transform:rotate(210deg) translate(0,-60px);transform:rotate(210deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#ffffff;-webkit-transform:rotate(240deg) translate(0,-60px);transform:rotate(240deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#ffffff;-webkit-transform:rotate(270deg) translate(0,-60px);transform:rotate(270deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#ffffff;-webkit-transform:rotate(300deg) translate(0,-60px);transform:rotate(300deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#ffffff;-webkit-transform:rotate(330deg) translate(0,-60px);transform:rotate(330deg) translate(0,-60px);border-radius:10px;position:absolute;'></div></div>
+          </div>
+      </div>
+    </div>
+</body>
+</html>

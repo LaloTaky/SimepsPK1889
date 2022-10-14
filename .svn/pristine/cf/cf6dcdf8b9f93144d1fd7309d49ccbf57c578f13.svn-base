@@ -1,0 +1,179 @@
+﻿<%@ Page Title="SIMEPS - Sistema de Medición de la Política Social" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Programa.aspx.cs" Inherits="SIMEPS.Programa" %>
+
+<asp:Content ID="BodyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server"> 
+    <div id="divBotones">
+        <input type="submit" id="linkDescargaRepMonitoreo" onclick='fjsDetenerEvento(event); fjsDescargaRepMonitoreo(this, false);' value="Descarga Reporte de Monitoreo" class="botonDescargaMonitoreo" />
+        <input type="submit" id="linkDescargaFichaTecnica" onclick='fjsDetenerEvento(event); fjsDescargaFichaIndicadores(this, false);' value="Descarga Ficha de los indicadores" class="botonDescarga" />
+        <input type="submit" id="linkDescargaBaseIndicadores" onclick='fjsDetenerEvento(event); fjsDescargaBaseIndicadores(this);' value="Descarga base de datos de los indicadores" class="botonDescarga"  />
+     </div>
+    <div class="borderedFrame">                       
+        <div class="headerPrograma">
+            <span id="spnNombrePrograma"></span>
+        </div>                    
+        <div class="tablaPrograma">                                                                                                               
+            <div class="rowPemir" style="width:100% !important">                
+                <div class="columnLeft"> 
+                    <div class="headerProposito headerTituloNivel">
+                        Indicadores del objetivo del programa (Propósito)
+                    </div>                       
+                    <div class="tablaIndicadores">
+                        <asp:Repeater ID="rprObjetivosProp" runat="server" DataSourceID="odsObjetivosProp">
+                            <itemtemplate>
+                                <div class="rowPemir">
+                                    <div class="rowObjetivo" style="border-right: 2px;border-right-style: solid !important;
+                                                                border-top-color: #FFFFFF !important;
+                                                                border-top-style: solid !important;
+                                                                border-top: 1px;">
+                                        Objetivo del programa (Propósito):
+                                    </div>
+                                </div>
+                                <div class="rowPemir">
+                                    <div class="rowDescObjetivo bordeObj">
+                                        <asp:Label ID="lblDescNivelProp" runat="server" Text='<%#Eval("DESC_NIVEL") %>'></asp:Label>
+                                        <asp:Label ID="lblIdNivelProp" runat="server" Text='<%#Eval("ID_NIVEL") %>' CssClass="labelObjInd"></asp:Label>
+                                    </div>
+                                </div>
+                                            
+                                <asp:Repeater ID="rprIndProp" runat="server" DataSource='<%#Eval("INDICADORES") %>'>
+                                    <itemtemplate>
+                                        <div class="rowPemir">
+                                            <div  class="rowIndicador" onmouseover="this.className='rowIndicadorHover';" onmouseout="this.className='rowIndicador';">
+                                                <a id="linkIndProp" runat="server" href='<%#Eval("LIGA") %>' class="LigaIndicador" target="_self" onclick="fjsDetenerEvento(event);mostrarIndicador(this);" >
+                                                    <div id="divLigaProp" style="width:100%">
+                                                        <asp:Label ID="lblNomIndProp" runat="server" Text='<%#Eval("NOMBRE_IND") %>'></asp:Label>
+                                                        <asp:Label ID="lblIdIndicadorIndProp" runat="server" Text='<%#Eval("ID_INDICADOR") %>' CssClass="labelObjInd"></asp:Label>
+                                                    </div>
+                                                </a>
+                                            </div >
+                                        </div>
+                                        <div class="rowPemir">
+                                            <div  class="bordeInd">
+                                                <div id="divGraficaProp">
+                                                        <div id="<%#Eval("ID_INDICADOR") %>" style="width: 100%; height: 220px;"></div>
+                                                    <asp:DropDownList ID="ddlGraficaProp" runat="server" CssClass="select" DataSource='<%#Eval("HISTORICOS") %>'
+                                                                        DataTextField="GRAFICA" DataValueField="NO" style="display: none">
+                                                    </asp:DropDownList>
+                                                </div>
+                                                <div class="fuenteGrafica">
+	                                                Fuente: Elaboración CONEVAL con base en información del Portal Aplicativo de​ la Secretaría de Hacienda y Crédito Público (PASH)
+                                                </div>  
+                                            </div >
+                                        </div>
+                                    </itemtemplate>
+                                </asp:Repeater>                              
+                            </itemtemplate>
+                        </asp:Repeater>
+                    </div>
+                    <asp:ObjectDataSource id="odsObjetivosProp" runat="server" TypeName="SIMEPS.Dal.IndicadoresDal" SelectMethod="ConsultarObjetivos">
+                        <selectparameters>
+                            <asp:querystringparameter name="idMatriz" querystringfield="pIdMatriz" type="Decimal" defaultvalue="0" />
+                            <asp:querystringparameter name="dIndicador" defaultvalue="0" />                                
+                            <asp:querystringparameter name="sNivel" defaultvalue="2" />
+                        </selectparameters>
+                    </asp:ObjectDataSource>
+                </div>
+                <div class="columnRigth">
+                    <div class="headerComponente headerTituloNivel">
+                        Indicadores del Apoyo del programa (Componente)
+                    </div>
+                    <div class="tablaIndicadores">
+                        <asp:Repeater ID="rprObjetivosComp" runat="server" DataSourceID="odsObjetivosComp">
+                            <itemtemplate>
+                                <div class="rowPemir">
+                                    <div  class="rowObjetivo" style="border-left: 2px; border-left-style: solid !important;
+                                                                border-top-color: #FFFFFF !important;
+                                                                border-top-style: solid !important;
+                                                                border-top: 1px;">
+                                        Apoyo del programa (Componente):
+                                    </div >
+                                </div>
+                                <div class="rowPemir">
+                                    <div  class="rowDescObjetivo bordeObj">
+                                        <asp:Label ID="lblDescNivelComp" runat="server" Text='<%#Eval("DESC_NIVEL") %>'></asp:Label>
+                                        <asp:Label ID="lblIdNivelComp" runat="server" Text='<%#Eval("ID_NIVEL") %>' CssClass="labelObjInd"></asp:Label>
+                                    </div >
+                                </div>
+                                <asp:Repeater ID="rprIndComp" runat="server"  DataSource='<%#Eval("INDICADORES") %>'>
+                                    <itemtemplate>
+                                        <div class="rowPemir">
+                                            <div  class="rowIndicador" onmouseover="this.className='rowIndicadorHover';" onmouseout="this.className='rowIndicador';">
+                                                <a id="linkIndComp" runat="server" href='<%#Eval("LIGA") %>' class="LigaIndicador" target="_self" onclick="fjsDetenerEvento(event);mostrarIndicador(this);" >
+                                                    <div id="divLigaProp" style="width:100%">
+                                                        <asp:Label ID="lblNomIndComp" runat="server" Text='<%#Eval("NOMBRE_IND") %>'></asp:Label>
+                                                        <asp:Label ID="lblIdIndicadorIndComp" runat="server" Text='<%#Eval("ID_INDICADOR") %>' CssClass="labelObjInd"></asp:Label>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="rowPemir">
+                                            <div  class="bordeInd">
+                                                <div id="divGraficaComp">                                                    
+                                                    <div id="<%#Eval("ID_INDICADOR") %>" style="width: 100%; height: 220px;"></div>
+                                                    <asp:DropDownList ID="ddlGraficaComp" runat="server" CssClass="select"  DataSource='<%#Eval("HISTORICOS") %>'
+                                                                        DataTextField="GRAFICA" DataValueField="NO" style="display: none">
+                                                    </asp:DropDownList>
+                                                </div>
+                                                <div class="fuenteGrafica">
+	                                                Fuente: Elaboración CONEVAL con base en información del Portal Aplicativo de​ la Secretaría de Hacienda y Crédito Público (PASH)
+                                                </div>                                                            
+                                            </div >                                                                                                           
+                                        </div>
+                                    </itemtemplate>
+                                </asp:Repeater>
+                            </itemtemplate>
+                        </asp:Repeater>
+                    </div>
+                    <asp:ObjectDataSource id="odsObjetivosComp" runat="server" TypeName="SIMEPS.Dal.IndicadoresDal" SelectMethod="ConsultarObjetivos">
+                        <selectparameters>
+                            <asp:querystringparameter name="idMatriz" querystringfield="pIdMatriz" type="Decimal" defaultvalue="0" />
+                            <asp:querystringparameter name="dIndicador" defaultvalue="0" />                                
+                            <asp:querystringparameter name="sNivel" defaultvalue="3" />
+                        </selectparameters>
+                    </asp:ObjectDataSource>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+
+    </div>
+    <script type="text/javascript">
+        fjsCargaPrograma();
+        if (window.location.search.match("[?&]IsDlg=1") || window.location.search.match("[?&]view=")) {
+            removeStyleDialog();
+            $('.LigaIndicador').each(function () {
+                this.href += '&IsDlg=1';
+            })
+        }
+    </script>       
+ <!--[if IE]>
+	<style>    
+        .rowIndicador{	
+	        font-style: italic;
+	        font-weight: bold;
+	        font-size: 12px;
+	        padding: 5px 10px 5px 15px;
+	        color: #FFFFFF;
+	        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#B6B6B6', endColorstr='#B6B6B6',GradientType=0 )
+	        border-radius: 11px;
+  	        -moz-border-radius: 11px;  
+	        -webkit-border-radius: 11px;
+        }
+        .rowIndicadorHover{	
+	        font-style: italic;
+	        font-weight: bold;
+	        font-size: 12px;
+	        padding: 5px 10px 5px 15px;
+	        color: #FFFFFF;
+	        /*CCS3 Degradado*/
+
+
+	        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0EA957', endColorstr='#0EA957',GradientType=0 )
+	        border-radius: 11px;
+  	        -moz-border-radius: 11px;
+  	        -webkit-border-radius: 11px;
+        }
+</style>
+<![endif]-->
+</asp:Content>
+

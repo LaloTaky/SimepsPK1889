@@ -1,0 +1,459 @@
+
+/*
+Objetivo: Construye una grafica de tipo Pila de Barras  
+Parámetros: chartData: Arreglo con los objetos a mostrar en el pie
+graphData: Arreglo de graficas
+sCategoria: Campo de la categoria
+divChart: Tag div donde se mostrará la gráfica
+sTituloAMostrar: Título a mostrar en la gráfica
+*/
+
+function fjsGeneraBarStack(chartData, graphData, sCategoria, divChart, sTituloAMostrar, sClick, sDoubleClick) {
+   var chart;
+
+   // SERIAL CHART
+   chart = new AmCharts.AmSerialChart();
+   if (sTituloAMostrar) chart.addTitle(sTituloAMostrar, 12);
+   chart.dataProvider = chartData;
+   chart.categoryField = sCategoria;
+   chart.plotAreaBorderAlpha = 0.2;
+   //chart.rotate = true;
+   //chart.depth3D = 20;
+   //chart.angle = 30;
+   chart.columnWidth = 0.3;
+   chart.marginRight = 0;
+   //chart.autoMargins=true;
+
+   // AXES
+   // Category
+   var categoryAxis = chart.categoryAxis;
+   categoryAxis.gridAlpha = 0.1;
+   categoryAxis.axisAlpha = 0;
+   categoryAxis.gridPosition = "start";
+
+   // value
+   var valueAxis = new AmCharts.ValueAxis();
+   valueAxis.stackType = "100%";
+   valueAxis.gridAlpha = 0.1;
+   valueAxis.axisAlpha = 0;
+   valueAxis.title = "Porcentajes";
+   chart.addValueAxis(valueAxis);
+
+   // GRAPHS
+   // firstgraph
+   for (var iIndex = 0; iIndex < graphData.length; iIndex++)
+      chart.addGraph(graphData[iIndex]);
+
+   // LEGEND
+   var legend = new AmCharts.AmLegend();
+   legend.position = "right";
+   legend.borderAlpha = 0.3;
+   legend.horizontalGap = 10;
+   legend.switchType = "v";
+   legend.labelWidth = 80;
+   legend.fontSize = 9;
+   legend.width = 190;
+   //legend.right=10
+   chart.addLegend(legend);
+
+   // WRITE
+   chart.write(divChart);
+}
+
+
+
+/*
+Objetivo: Construye una grafica de tipo Pie 
+Parámetros: chartData: Arreglo con los objetos a mostrar en el pie
+            aColors: Arreglo de colores
+            sTitulo: Campo del objeto que representa el título
+            sValor: Campo del objeto que representa el valor
+            divChart: Tag div donde se mostrará la gráfica
+            sTituloAMostrar: Título a mostrar en la gráfica
+            sClickParam: Parámetro que identifica el tipo de pantalla que genera el evento
+*/
+function fjsGeneraPie(chartData, aColors, sTitulo, sValor, divChart, sTituloAMostrar, sYPos, iAnchoEtiqueta, sClickParam) {
+   var chartPie;
+
+
+   // PIE CHART
+   chartPie = new AmCharts.AmPieChart();
+   if (sTituloAMostrar) chartPie.addTitle(sTituloAMostrar, 12);
+   chartPie.dataProvider = chartData;
+   chartPie.colors = aColors;
+   chartPie.titleField = sTitulo;
+   chartPie.valueField = sValor;
+   /*chartPie.outlineColor = "#FFFFFF";
+   chartPie.outlineAlpha = 0.8;
+   chartPie.outlineThickness = 2;*/
+   chartPie.balloonText = "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>";
+   // this makes the chart 3D
+   chartPie.depth3D = 15;
+   chartPie.angle = 30;
+   chartPie.marginLeft = 0;
+   chartPie.marginRight = 0;
+   if (sYPos) chartPie.pieY = sYPos;
+   //chartPie.width = "120%";
+   //chartPie.height = "100%";
+   if (iAnchoEtiqueta) chartPie.maxLabelWidth = iAnchoEtiqueta;
+   else chartPie.maxLabelWidth = 70;
+   chartPie.creditsPosition = "top";
+
+   if (sClickParam) {
+      chartPie.addListener("clickSlice", function (event) {
+         if (event.dataItem.dataContext.id != undefined) {
+            fjsPieClick(event.dataItem.dataContext.id, sClickParam);
+         }
+      });
+   }
+
+   // WRITE
+   chartPie.write(divChart)
+
+}
+
+/*
+Objetivo: Construye una grafica de tipo Columna o barra
+Parámetros: chartData: Arreglo con los objetos a mostrar en el pie
+             sTitulo: Campo del objeto que representa el título
+             sValor: Campo del objeto que representa el valor
+             divChart: Tag div donde se mostrará la gráfica
+             sTituloAMostrar: Título a mostrar en la gráfica
+             sClickParam: Parámetro que identifica el tipo de pantalla que genera el evento
+*/
+function fjsGeneraBarra(chartData, sTitulo, sValor, divChart, sTituloAMostrar, sClickParam) {
+   // SERIAL CHART
+   chart = new AmCharts.AmSerialChart();
+   if (sTituloAMostrar) chart.addTitle(sTituloAMostrar, 12);
+   chart.pathToImages = "/img/Grafica/";
+   chart.dataProvider = chartData;
+   chart.categoryField = sTitulo;
+   chart.startDuration = 5;
+   chart.zoomOutText = "Mostrar Todo";
+
+
+   // AXES
+   // category
+   var categoryAxis = chart.categoryAxis;
+   categoryAxis.labelRotation = 45;
+   categoryAxis.gridAlpha = 0;
+   categoryAxis.fillAlpha = 1;
+   categoryAxis.fillColor = "#FAFAFA";
+   categoryAxis.gridPosition = "start";
+
+   // value
+   var valueAxis = new AmCharts.ValueAxis();
+   valueAxis.dashLength = 5;
+   //valueAxis.title = "Visitors from country";
+   valueAxis.axisAlpha = 0;
+   chart.addValueAxis(valueAxis);
+
+   // GRAPH 
+   var graph = new AmCharts.AmGraph();
+   //graph.title = "Visits";
+   graph.valueField = sValor;
+   graph.colorField = "color";
+   graph.balloonText = "<b>[[category]]: [[value]]</b>";
+   graph.type = "column";
+   graph.lineAlpha = 0;
+   graph.fillAlphas = 1;
+   chart.addGraph(graph);
+
+   // CURSOR
+   var chartCursor = new AmCharts.ChartCursor();
+   chartCursor.cursorAlpha = 1;
+   chartCursor.zoomable = false;
+   chartCursor.categoryBalloonEnabled = true;
+   //chartCursor.oneBalloonOnly=true;
+   chart.addChartCursor(chartCursor);
+
+   // SCROLLBAR
+   var chartScrollbar = new AmCharts.ChartScrollbar();
+   chart.addChartScrollbar(chartScrollbar);
+
+   // WRITE
+   chart.write(divChart);
+}
+
+
+/*
+Objetivo: Construye una grafica de tipo Columna o barra
+Parámetros: chartData: Arreglo con los objetos a mostrar en el pie
+             sTitulo: Campo del objeto que representa el título
+             sValor: Campo del objeto que representa el valor
+             divChart: Tag div donde se mostrará la gráfica
+             sTituloAMostrar: Título a mostrar en la gráfica
+             sClickParam: Parámetro que identifica el tipo de pantalla que genera el evento
+*/
+function fjsGeneraBarraComparativa(chartData, sTitulo, sValor1, sValor2, divChart, sTituloAMostrar, sClickParam) {
+   // SERIAL CHART
+   chart = new AmCharts.AmSerialChart();
+   if (sTituloAMostrar) chart.addTitle(sTituloAMostrar, 12);
+   chart.pathToImages = "/img/Grafica/";
+   chart.dataProvider = chartData;
+   chart.categoryField = sTitulo;
+   chart.startDuration = 5;
+   chart.zoomOutText = "Mostrar Todo";
+
+
+   // AXES
+   // category
+   var categoryAxis = chart.categoryAxis;
+   categoryAxis.labelRotation = 45;
+   categoryAxis.gridAlpha = 0;
+   categoryAxis.fillAlpha = 1;
+   categoryAxis.fillColor = "#FAFAFA";
+   categoryAxis.gridPosition = "start";
+
+   // value
+   var valueAxis = new AmCharts.ValueAxis();
+   valueAxis.dashLength = 5;
+   //valueAxis.title = "Visitors from country";
+   valueAxis.axisAlpha = 0;
+   chart.addValueAxis(valueAxis);
+
+   // GRAPH 
+   var graph = new AmCharts.AmGraph();
+   //graph.title = "Visits";
+   graph.valueField = sValor1;
+   graph.colorField = "color1";
+   graph.balloonText = "<span style='font-size:13px;'>[[title]] Meta Planeada [[category]]:<b>[[value]]</b></span>";/*"<b>[[category]]: [[value]]</b>";*/
+
+   graph.type = "column";
+   graph.lineAlpha = 0;
+   graph.fillAlphas = 1;
+   chart.addGraph(graph);
+
+   // GRAPH 2
+   var graph2 = new AmCharts.AmGraph();
+   //graph.title = "Visits";
+   graph2.valueField = sValor2;
+   graph2.colorField = "color2";
+   graph2.balloonText = "<span style='font-size:13px;'>[[title]] Meta Alcanzada [[category]]:<b>[[value]]</b></span>";/*"<b>[[category]]: [[value]]</b>";*/
+   graph2.type = "column";
+   graph2.lineAlpha = 0;
+   graph2.fillAlphas = 1;
+   chart.addGraph(graph2);
+
+   // CURSOR
+   var chartCursor = new AmCharts.ChartCursor();
+   chartCursor.cursorAlpha = 1;
+   chartCursor.zoomable = true;
+   chartCursor.categoryBalloonEnabled = true;
+   //chartCursor.oneBalloonOnly=true;
+   chart.addChartCursor(chartCursor);
+
+   // SCROLLBAR
+   var chartScrollbar = new AmCharts.ChartScrollbar();
+   chart.addChartScrollbar(chartScrollbar);
+
+   // WRITE
+   chart.write(divChart);
+}
+
+
+/*
+Objetivo: Construye una grafica de tipo histograma
+Parámetros: chartData: Arreglo con los objetos a mostrar en el pie
+            sTitulo: Campo del objeto que representa el título
+            sValor: Campo del objeto que representa el valor
+            divChart: Tag div donde se mostrará la gráfica
+            sTituloAMostrar: Título a mostrar en la gráfica
+            sClickParam: Parámetro que identifica el tipo de pantalla que genera el evento
+*/
+function fjsGeneraHistograma(chartData, sTitulo, sValor, divChart, sTituloAMostrar, sClickParam) {
+   // SERIAL CHART
+   chart = new AmCharts.AmSerialChart();
+   if (sTituloAMostrar) chart.addTitle(sTituloAMostrar, 12);
+   chart.pathToImages = "/img/Grafica/";
+   chart.dataProvider = chartData;
+   chart.categoryField = sTitulo;
+   chart.startDuration = 2;
+   chart.zoomOutText = "Mostrar Todo";
+
+   // AXES
+   // category
+   var categoryAxis = chart.categoryAxis;
+   //categoryAxis.labelRotation = 45;
+   categoryAxis.gridAlpha = 0;
+   categoryAxis.fillAlpha = 1;
+   categoryAxis.fillColor = "#FAFAFA";
+   categoryAxis.gridPosition = "start";
+
+   // value
+   var valueAxis = new AmCharts.ValueAxis();
+   valueAxis.dashLength = 5;
+   //valueAxis.title = "Visitors from country";
+   valueAxis.axisAlpha = 0;
+   chart.addValueAxis(valueAxis);
+
+   // GRAPH
+   var graph2 = new AmCharts.AmGraph();
+   graph2.type = "line";
+   graph2.lineColor = "#27c5ff";
+   graph2.bulletColor = "#FFFFFF";
+   graph2.bulletBorderColor = "#27c5ff";
+   graph2.bulletBorderThickness = 2;
+   graph2.bulletBorderAlpha = 1;
+   graph2.valueField = sValor;
+   graph2.lineThickness = 2;
+   graph2.bullet = "round";
+   graph2.fillAlphas = 0;
+   graph2.balloonText = "<span style='font-size:13px;'>[[title]] A&ntilde;o [[category]]:<b>[[value]]</b></span>";
+   chart.addGraph(graph2);
+
+   // CURSOR
+   var chartCursor = new AmCharts.ChartCursor();
+   chartCursor.cursorAlpha = 1;
+   chartCursor.zoomable = false;
+   chartCursor.categoryBalloonEnabled = true;
+   //chartCursor.oneBalloonOnly=true;
+   chart.addChartCursor(chartCursor);
+
+   // SCROLLBAR
+   var chartScrollbar = new AmCharts.ChartScrollbar();
+   chart.addChartScrollbar(chartScrollbar);
+
+   // WRITE
+   chart.write(divChart);
+}
+
+
+/*
+Objetivo: Construye una grafica de tipo histograma
+Parámetros: chartData: Arreglo con los objetos a mostrar en el pie
+            sTitulo: Campo del objeto que representa el título
+            sValor: Campo del objeto que representa el valor
+            divChart: Tag div donde se mostrará la gráfica
+            sTituloAMostrar: Título a mostrar en la gráfica
+            sClickParam: Parámetro que identifica el tipo de pantalla que genera el evento
+*/
+function fjsGeneraHistogramaComparativa(chartData, sTitulo, sValor1, sValor2, divChart, sTituloAMostrar, showScroll) {
+   // SERIAL CHART
+   chart = new AmCharts.AmSerialChart();   
+   if (sTituloAMostrar) chart.addTitle(sTituloAMostrar, 12);
+   chart.pathToImages = "/img/Grafica/";
+   chart.dataProvider = chartData;
+   chart.categoryField = sTitulo;
+   chart.startDuration = 2;
+   chart.zoomOutText = "Mostrar Todo";
+   chart.autoResize = true;
+   chart.responsive = {
+       "enabled": true
+   };
+   // AXES
+   // category
+   var categoryAxis = chart.categoryAxis;
+   //categoryAxis.labelRotation = 45;
+   categoryAxis.gridAlpha = 0;
+   categoryAxis.fillAlpha = 1;
+   categoryAxis.fillColor = "#FAFAFA";
+   categoryAxis.gridPosition = "start";
+
+   // value
+   var valueAxis = new AmCharts.ValueAxis();
+   valueAxis.dashLength = 5;
+   valueAxis.gridAlpha = 0;
+   valueAxis.axisAlpha = 0;
+   chart.addValueAxis(valueAxis);
+
+   // GRAPH
+   var graph1 = new AmCharts.AmGraph();
+   graph1.type = "line";
+   //graph1.colorField = "color1";
+   graph1.lineColorField = "color1";//"#27c5ff";
+   graph1.bulletColor = "#FFFFFF";
+   graph1.bulletBorderColor = "#27c5ff";
+   graph1.bulletBorderThickness = 2;
+   graph1.bulletBorderAlpha = 1;
+   graph1.valueField = sValor1;
+   graph1.lineThickness = 2;
+   graph1.bullet = "round";
+   graph1.fillAlphas = 0;
+   graph1.balloonText = "<span style='font-size:13px;'>[[title]] Meta Planeada [[category]]:<b>[[value]]</b></span>";
+   chart.addGraph(graph1);
+
+   // GRAPH
+   var graph2 = new AmCharts.AmGraph();
+   graph2.type = "line";
+   //graph2.colorField = "color2";
+   graph2.lineColorField = "color2";;//"#27c5ff";
+   graph2.bulletColor = "#FFFFFF";
+   graph2.bulletBorderColor = "#F7D358";
+   graph2.bulletBorderThickness = 2;
+   graph2.bulletBorderAlpha = 1;
+   graph2.valueField = sValor2;
+   graph2.lineThickness = 2;
+   graph2.bullet = "round";
+   graph2.fillAlphas = 0;
+   graph2.balloonText = "<span style='font-size:13px;'>[[title]] Meta Alcanzada [[category]]:<b>[[value]]</b></span>";
+   chart.addGraph(graph2);
+
+   // CURSOR
+   var chartCursor = new AmCharts.ChartCursor();
+   chartCursor.cursorAlpha = 1;
+   chartCursor.zoomable = true;
+   chartCursor.categoryBalloonEnabled = true;
+   //chartCursor.oneBalloonOnly=true;
+   
+   //chartCursor.enabled=false; JCC
+   chart.addChartCursor(chartCursor);
+   
+   // SCROLLBAR
+  /* if(showScroll){
+      var chartScrollbar = new AmCharts.ChartScrollbar();
+      chart.addChartScrollbar(chartScrollbar);
+   }*/
+   // WRITE
+   chart.write(divChart);
+}
+
+
+/*
+Objetivo: Construye una grafica de tipo Dona 
+Parámetros: 
+*/
+function fjsGeneraDona(chartData, graphData, sTitulo, sValor, divChart, sClick, sDoubleClick) {
+   var chartDona;
+
+
+   chartDona = new AmCharts.AmPieChart();
+   //chartDona.addTitle(sTituloAMostrar, 14);
+
+   chartDona.dataProvider = chartData;
+   chartDona.titleField = sTitulo;
+   chartDona.valueField = sValor;
+   chartDona.sequencedAnimation = true;
+   chartDona.startEffect = "elastic";
+   chartDona.innerRadius = "30%";
+   chartDona.startDuration = 2;
+   chartDona.labelRadius = 10;
+   chartDona.balloonText = "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>";
+   chartDona.depth3D = 10;
+   chartDona.angle = 15;
+   chartDona.maxLabelWidth = 120;
+
+   chartDona.addListener("clickSlice", function (event) {
+      if (event.dataItem.dataContext.id != undefined) {
+         fjsMuestraPopUp(event, divChart, event.dataItem.dataContext.id, event.dataItem.tx, event.dataItem.ty);
+      }
+   });
+
+   chartDona.write(divChart)
+}
+
+
+/*
+Objetivo: Recupera el valor del parámetro proporcionado
+Parámetros: sParam: Nombre del parámetro a buscar en el Query String
+            Regresa: Valor del parámetro
+*/
+function fjsRecuperaParametro(sParam) {
+   var sValor = '0';
+   if (location.search.split(sParam + '=')[1]) {
+      sValor = location.search.split(sParam + '=')[1];
+      if (sValor.indexOf('&') > -1) sValor = sValor.substring(0, sValor.indexOf('&'));
+   }
+   return sValor;
+}
+

@@ -1,0 +1,73 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="BuscaIndicador.aspx.cs" Inherits="SIMEPS.BuscaIndicador" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+
+	<div class="borderedFrame"> 
+       <p class="BuscEncabezado">
+			Buscador Temático de Indicadores
+	   </p>
+	    <div class="tituloBusqueda">
+            <div>
+                <div style="text-align:left;">
+                     Derecho social:
+		            <asp:DropDownList ID="ddlDerechos" runat="server" DataSourceID="odsDerechos" DataTextField="DER_DESCRIPCION_I" DataValueField="DER_ID_I" Width="222px" CssClass="textoMosaico" AutoPostBack="true" onDataBound="ddlDerechosDataBound" >
+		            </asp:DropDownList>
+                    <br />
+                    <hr size="8px" color="black"/>
+		            Buscar por palabras clave:
+		            <asp:TextBox ID="texBuscador" runat="server" CssClass="textoBusqueda" ></asp:TextBox>
+		    
+		            <asp:ObjectDataSource ID="odsDerechos" runat="server" TypeName="Simeps.Dal.IndicadoresDal" SelectMethod="ConsultarDerechos">
+		            </asp:ObjectDataSource>
+                    <br /><br />
+                    <div class="col-md-1" style="padding-left:9em;">
+		                <asp:Button runat="server" ID="btnBuscar" Text="Buscar" CssClass="botonBuscar" />
+                    </div>
+                    <br /><br />
+                </div>
+            </div>
+	    </div> 
+
+	    <asp:UpdatePanel ID="upnIndicadores" runat="server">
+		    <ContentTemplate>
+
+			    <asp:GridView ID="grvPrograma" runat="server" AutoGenerateColumns="false" ShowHeader="true" DataSourceID="sdsBuscador" style="width: 100%" AllowPaging="true" PageSize="30" CssClass="tabla">
+				    <columns>
+					    <asp:templatefield itemstyle-width="84%" headertext="Resultados de la búsqueda" itemstyle-cssclass="tablaColumna" headerstyle-cssclass="EncabezadoProgramas">
+						    <itemtemplate>
+							    <a id="aPrograma" runat="server" style="color: #1b4093" href='<%#Eval("LIGA")%>' class="LigaPrograma">
+								    <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE") %>'></asp:Label>
+							    </a>
+							    <br />
+							    <asp:Label ID="lblDefinicion" runat="server" Text='<%#Eval("DEFINICION_IND") %>'></asp:Label>
+						    </itemtemplate>
+					    </asp:templatefield>
+				    </columns>
+				    <rowstyle cssclass="tablaRenglon" />
+				    <pagerstyle cssclass="PaginacionProgramas" />
+				    <alternatingrowstyle backcolor="#e1e1e1" />
+			    </asp:GridView>
+
+		    </ContentTemplate>
+		    <Triggers>
+			    <asp:AsyncPostBackTrigger ControlID="btnBuscar"  />
+		    </Triggers>
+	    </asp:UpdatePanel>
+      	    <asp:ObjectDataSource ID="sdsBuscador" runat="server" TypeName="Simeps.Dal.IndicadoresDal" SelectMethod="BuscarIndicadores">
+		    <selectparameters>
+			    <asp:controlparameter name="textoBusqueda" controlid="texBuscador" type="String"/>
+             <asp:controlparameter name="derecho" controlid="ddlDerechos" type="Int16" defaultvalue="0" />
+             <asp:Parameter name="ciclo" type="Int16" defaultvalue="" />
+             <asp:Parameter name="ramo"  type="Int16" defaultvalue="" />
+             <asp:Parameter name="idMatriz"  type="String" defaultvalue="0" />
+             <asp:Parameter name="objetivo"  type="Int16" defaultvalue="0" />
+             <asp:Parameter name="nivelMIR"  type="Int16" defaultvalue="0" />
+             <asp:Parameter name="unidadM"  type="String" defaultvalue="0" />
+             <asp:Parameter name="frecuencia"  type="String" defaultvalue="0" />
+		    </selectparameters>
+	    </asp:ObjectDataSource>
+	</div>
+
+</asp:Content>

@@ -1,0 +1,103 @@
+﻿<%@ Page Title="SIMEPS - Sistema de Medición de la Política Social" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="True" CodeBehind="MIR.aspx.cs" Inherits="SIMEPS.MIR" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div id="divBotones" style="text-align: left !important">        
+        <input type="submit" id="linkDescargaMIR" onclick='fjsDetenerEvento(event); fjsDescargaMIR(this);' value="Descarga MIR" class="botonDescarga" />       
+     </div>
+    <div class="borderedFrame">
+        <asp:Repeater ID="rptPrograma" runat="server" DataSourceID="odsProgramas">
+            <ItemTemplate>
+                <br />
+                <asp:Label ID="lblNombrePrograma" runat="server" Text='<%#Eval("NOMBRE") %>' CssClass="tituloMir" ></asp:Label>
+                <br /><br />
+                <asp:Label ID="lblTituloResumen" runat="server" Text="Resumen de la Matriz de Indicadores" CssClass="tutuloResumenMir" ></asp:Label>
+            
+                <br /><br />
+                <label class="tituloObjetivos">Objetivo nacional: </label>
+                <asp:Label ID="lblPrograma" runat="server" Text='<%#Eval("OBJETIVO_NACIONAL") %>' ></asp:Label>
+                <br />
+                <label class="tituloObjetivos">Objetivo estrategico: </label>
+                <asp:Label ID="lblEstrategico" runat="server" Text='<%#Eval("OBJETIVO_ESTRATEGICO") %>' ></asp:Label>
+                <br /><br />
+                <asp:GridView ID="gvObjetivos" 
+                    runat="server" 
+                    DataSource='<%#Eval("OBJETIVOS") %>' 
+                    AutoGenerateColumns="false" 
+                    OnDataBound="gvObjetivos_DataBound"
+                    CssClass="gridObjetivos"
+                    HeaderStyle-CssClass="header"
+                    BorderWidth="2px"
+                     >
+                    <Columns>
+                        <asp:TemplateField HeaderStyle-Width="30px" ItemStyle-Width="30px" ItemStyle-BackColor="#3A3D94" ItemStyle-BorderColor="White">
+                            <HeaderTemplate>
+                                MIR
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <div class="vertical">
+                                    <asp:Label ID="lblObjetivo" runat="server" Text='<%#Eval("NIVEL_TEXTO") %>'></asp:Label>
+                                </div>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField ItemStyle-Width="170px">
+                            <HeaderTemplate>
+                                <asp:Label runat="server" Width="200px" CssClass="titulosIndicadores">Resumen Narrativo</asp:Label>
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:Label runat="server" Text='<%#Eval("NUMERACION").ToString().Equals("0")?"":Eval("NUMERACION").ToString().Replace(".","-")+"."%>' CssClass="tituloObjetivos"></asp:Label>
+                               <asp:Label ID="lblObjetivo" runat="server" Text='<%#Eval("DESC_NIVEL") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField>
+                            <HeaderTemplate>
+                                <asp:Label runat="server" Width="200px" CssClass="titulosIndicadores">Indicador</asp:Label>
+                                <asp:Label runat="server" Width="200px" CssClass="titulosIndicadores">Medios de Verificación</asp:Label>
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:GridView runat="server" ID="gvIndicadores" DataSource='<%#Eval("INDICADORES") %>' AutoGenerateColumns="false" ShowHeader="false" BorderWidth="0" Width="400px" RowStyle-CssClass="trIndicadores"  OnRowDataBound="gvIndicadores_RowDataBound">
+                                    <Columns>
+                                        <asp:TemplateField  ItemStyle-Width="200px">
+                                            <ItemTemplate>
+                                                <asp:HyperLink id="hyperlink"  NavigateUrl='<%#Eval("LIGA") %>' Text='<%#Eval("NOMBRE_IND") %>' Target="_self" runat="server"/>                                                  
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField  ItemStyle-Width="200px">
+                                            <ItemTemplate>
+                                                <asp:GridView runat="server" ID="gvVariables" DataSource='<%#Eval("VARIABLES") %>' AutoGenerateColumns="false" ShowHeader="false" BorderWidth="0" Width="200px" >
+                                                    <Columns>
+                                                        <asp:TemplateField>
+                                                            <ItemTemplate>
+                                                                <p style="width:200px;word-break:normal;word-wrap:break-word">
+                                                                    <%#Eval("DESC_MEDIO_VERIFICACION") %>
+                                                                </p>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                    </Columns>
+                                                </asp:GridView>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                                </asp:GridView>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                </asp:GridView>
+            </ItemTemplate>
+        </asp:Repeater>
+        <asp:ObjectDataSource ID="odsProgramas" runat="server" TypeName="SIMEPS.Dal.IndicadoresDal" SelectMethod="ConsultarPrograma" >
+            <selectparameters>
+                <asp:querystringparameter name="Anio" querystringfield="pCiclo" type="Decimal" defaultvalue="0" />
+                <asp:querystringparameter name="Ramo" querystringfield="pRamo" defaultvalue="0" />
+                <asp:querystringparameter name="Unidad" querystringfield="unidad" defaultvalue="0" />
+                <asp:querystringparameter name="palabraClave" defaultvalue="0"/>  
+                <asp:querystringparameter name="dMatriz" querystringfield="pIdMatriz" defaultvalue="-1" />
+                <asp:querystringparameter name="dIndicador" querystringfield="sIndicador" defaultvalue="0" />
+                <asp:querystringparameter name="sNivel" querystringfield="sNivel" defaultvalue="0" />
+                <asp:querystringparameter name="sPantalla" querystringfield="t" />
+                <asp:Parameter Name="universoPaemir" DefaultValue="1" />  
+                <asp:Parameter Name="idIndicadorSectorial" DefaultValue="-1" />  
+            </selectparameters>
+        </asp:ObjectDataSource>
+    </div>  
+</asp:Content>

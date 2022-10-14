@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="SIMEPS/SIMEPS" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\JPL\\Documents\\Coneval\\SIMEPS\\branches\\PK327\\SIMEPS\\obj\\Debug\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\JPL\\Documents\\Coneval\\SIMEPS\\branches\\PK327\\SIMEPS\\obj\\Debug\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="Entities-Web.config Connection String" description="" value="metadata=res://*/EF.ConevalModel.csdl|res://*/EF.ConevalModel.ssdl|res://*/EF.ConevalModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=DESKTOP-FF5M9LA\ECLIPSE;initial catalog=mirDB;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\JPL\\Documents\\Coneval\\SIMEPS\\branches\\PK327\\SIMEPS\\obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='Entities']/@connectionString" />
+  </parameter>
+  <parameter name="inventarioDBEntities-Web.config Connection String" description="" value="metadata=res://*/EF.InventariosModel.csdl|res://*/EF.InventariosModel.ssdl|res://*/EF.InventariosModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=DESKTOP-FF5M9LA\ECLIPSE;initial catalog=inventarioDB;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\JPL\\Documents\\Coneval\\SIMEPS\\branches\\PK327\\SIMEPS\\obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='inventarioDBEntities']/@connectionString" />
+  </parameter>
+</parameters>

@@ -1,0 +1,110 @@
+﻿<%@ Page Title="SIMEPS - Sistema de Medición de la Política Social" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Mosaico.aspx.cs" Inherits="SIMEPS.Mosaico" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+	<div class="borderedFrame">
+		<h2 class="PlecaEncabezado">
+			<span id="headerContent"> SISTEMA DE INDICADORES DE LOS PROGRAMAS Y ACCIONES DE DESARROLLO SOCIAL&#8203;&#8203;&#8203;</span>
+		</h2>
+		<br />
+		<div class="textoMosaico">
+			<div> 
+				<span class="textoMosaico">Los indicadores son una herramienta utilizada, a partir de varia&#8203;bles cuantitativas o cualitativas, para medir el logro de los ob&#8203;jetivos de los programas de desarrollo social y que representan un referente para el seguimiento de los avances y la evaluación de sus resultados. En México, los indicadores de los programas y acciones de desarrollo social han sido generados con base en la Metodología de Marco Lógico a través de la&nbsp;</span>
+				<a href="<%=urlMetodologiaMir%>" target="_top" >
+					<b>
+						<span >Matriz de Indicadores para Resultados</span>
+					</b>
+				</a>
+				<span style="line-height: 15.33px; font-family: arial, sans-serif; font-size: 10pt; background-color: transparent;">&nbsp;(MIR).&#8203;&#8203;</span><br />
+			</div>
+			<div>
+				<span>&#8203;<br/></span>
+			</div>
+			<p class="MsoNormal"> 
+				<span >El Sistema de Indicadores de los Programas y Acciones de Desarrollo Social expone el seguimiento de los indicadores de dichos programas, los c&#8203;uales, proveen información oportuna y robusta sobre el alcance de sus objetivos.</span>
+			</p>
+			<h2 style="color: #00a94f; line-height: 18px; font-family: arial; font-size: 10pt;text-align: justify;"> 
+				<span>¿Para qué sirve el Sistema de Indicadores de los Programas y Acciones de Desarrollo Social?</span>
+			</h2>
+			<br />
+			<p  style="text-indent: -18pt; padding-left: 39px;"> 
+				<span class="bulletsMosaico">·<span >&nbsp;&nbsp;&nbsp;</span></span><span >Para que los tomadores de decisiones y la ciudadanía en general cuenten con información &nbsp;acerca de los indicadores,metas y resultados de los programas y acciones sociales.</span>
+			</p>
+		
+				<p style="text-indent: -18pt; padding-left: 39px;"> 
+					<span class="bulletsMosaico">·<span >&nbsp;&nbsp;&nbsp;</span></span> 
+					<span >Contribuir a la transparencia y rendición de cuentas.</span>
+				</p>
+				<p style="text-indent: -18pt; padding-left: 39px;"> 
+					<span class="bulletsMosaico">·<span style="line-height: normal;">&nbsp;&nbsp;&nbsp;</span></span><span >Para mejorar las políticas públicas, con la finalidad de continuar y corregir los programas &nbsp; &nbsp; &nbsp;y acciones de desarrollo&nbsp;social.</span>
+				</p>
+				<p > 
+					<span >En un esfuerzo porque esto suceda, el CONEVAL ha incluido en esta sección información de los indicadores de los niveles de 
+						<b><i>Propósito</i></b></span><span class="apple-converted-space"><span style="color: #262626; line-height: 115%; font-size: 10pt;">&nbsp;</span></span><span >(razón de ser de los programas) y de 
+						<b><i>Componentes</i></b></span><span class="apple-converted-space"><span style="color: #262626; line-height: 115%; font-size: 10pt;">&nbsp;</span></span><span >(bienes o servicios entregados a la población beneficiaria) de cada programa y acción social.
+					</span>
+				</p>
+				<p > 
+					<span >Con la información que se presenta en esta sección, es posible conocer los resultados de los programas y acciones sociales, así como los avances en la solución de problemáticas específicas que buscan resolver, ¡consulta el Sistema de Indicadores de los Programas y Acciones de Desarrollo Social de México!</span>
+				</p>
+				<p > 
+					<span >La información contenida en las MIR es responsabilidad de cada programa por lo que para cualquier información adicional, se sugiere solicitarla directamente a la dependencia o programa responsable.</span><span style="line-height: 1.231; background-color: transparent;">&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;&#8203;</span><span style="line-height: 1.231; background-color: transparent;">&#8203;&#8203;&#8203;&#8203;&#8203;</span>
+				</p>
+		
+		</div>
+		<br />
+		 <span class="textoMosaico" runat="server" id="spnCiclo" >Seleccione el año que desea consultar: </span>
+		<asp:DropDownList ID="ddlCiclos" runat="server" DataSourceID="odsCiclos" DataTextField="CICLO_VALUE" DataValueField="CICLO_ID" Width="200px" CssClass="textoMosaico" AutoPostBack="true" onDataBound="ddlCiclosDataBound" >
+		</asp:DropDownList>
+		<asp:ObjectDataSource ID="odsCiclos" runat="server" TypeName="SIMEPS.Dal.IndicadoresDal" SelectMethod="ConsultarCiclos">
+		</asp:ObjectDataSource>
+	
+
+	
+		<asp:UpdatePanel ID="upnMosaicos" runat="server">
+			<ContentTemplate>
+				<br />
+				<table class="tablaMosaico">
+					<asp:Repeater ID="rprMosaicos" runat="server" DataSourceID="odsMosaicos">
+						<itemtemplate>
+							<%# Container.ItemIndex%3 == 0 ? (Container.ItemIndex == 0 ?"":"</tr><tr>"):""%>
+							<td class="tdMosaico" onmouseover="this.className='tdMosaicoHover';" onmouseout="this.className='tdMosaico';">
+								<a href='<%#Eval("LIGA")+valorT%>'>
+								<img src='<%#Eval("NOM_ARCHIVO") %>' alt="Responsive image" onerror="this.src='/SiteCollectionImages/Paemir/LogosDependencias/imgNoExist.png'" class="imagenMosaico" >
+								</a>
+							</td>
+
+						</itemtemplate>
+					</asp:Repeater>
+				</table>            
+			</ContentTemplate>
+			<Triggers>
+				<asp:AsyncPostBackTrigger ControlID="ddlCiclos" />
+			</Triggers>
+		</asp:UpdatePanel>
+		<asp:ObjectDataSource ID="odsMosaicos" runat="server" TypeName="SIMEPS.Dal.IndicadoresDal" SelectMethod="ConsultarMosaicos">
+			<selectparameters>
+				<asp:ControlParameter ControlID="ddlCiclos" DefaultValue="2015" Name="pCiclo"/>
+			</selectparameters>
+		</asp:ObjectDataSource>
+
+
+		<div class="tituloBusqueda">
+			Buscador de indicadores por palabras clave:
+			<asp:TextBox ID="txtBuscado" runat="server" CssClass="textoBusqueda" ></asp:TextBox>
+			<asp:Button runat="server" ID="btnBuscar" Text="Buscar" CssClass="botonBuscar"  OnClick="BuscarIndicador" /><br />				
+		</div> 
+        <script>
+            document.onreadystatechange = function () {
+                var state = document.readyState
+                if (state == 'complete') {
+                    var select = document.getElementById('ContentPlaceHolder1_ddlCiclos');
+                    if (select != null && select != undefined) {
+                        var lastValue = select.options[select.options.length - 1].value;
+                        select.value = lastValue;
+                    }
+                }
+            }                     
+        </script>
+	</div>
+</asp:Content>

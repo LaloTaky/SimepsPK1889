@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap>
+  <siteMapNode title="SIMEPS" description="SIMEPS" url="~/Home.aspx" id="sitemapsPrincipal">
+
+    <siteMapNode title="Módulo SIPS" description="Módulo SIPS" url="~/MosaicoSips.aspx">
+      <siteMapNode title="Programas" description="Programas" url="~/Programas.aspx" >
+        <siteMapNode title="Programa" description="Programa" url="~/Programa.aspx" >
+          <siteMapNode title="Detalle" description="Detalle" url="~/DetalleIndicador.aspx" />
+        </siteMapNode>
+        <siteMapNode title="MIR" description="MIR" url="~/MIR.aspx"/>
+      </siteMapNode>
+      <siteMapNode title="Buscador Temático" description="Buscador Temático" url="~/BuscaIndicador.aspx">
+      </siteMapNode>
+    </siteMapNode>
+
+    <!--PK1074-->
+    <siteMapNode title="Módulo MIR33" description="Módulo MIR33" url="~/HomeRamo33.aspx">
+      <siteMapNode title="Matriz" description="Matriz" url="~/MosaicoRamo33.aspx">
+        <siteMapNode title="Componentes" description="Componentes" url="~/IndicadoresR33.aspx">
+          <siteMapNode title="Componente" description="Componentes" url="~/IndicadorR33.aspx"/>
+          </siteMapNode>
+        </siteMapNode>
+    </siteMapNode>
+    <!--PK1074-->
+
+    <siteMapNode title="Home SIPOL" description="Home SIPOL" url="~/HomeSIPOL.aspx">
+
+      <siteMapNode title="Módulo SIPOL" description="Módulo SIPOL" url="~/MetasNacionales.aspx"/>
+      
+      <siteMapNode title="Módulo SIPOL" description="Módulo SIPOL" url="~/MosaicoSectores.aspx">
+        
+        <siteMapNode title="Indicador Sectorial" description="Indicador Sectorial" url="~/IndicadorSectorial.aspx" />
+        <siteMapNode title="Indicadores de Fin" description="Indicadores de Fin" url="~/MosaicoFin.aspx">
+          <siteMapNode title="Programas Fin" description="Programas Fin" url="~/ProgramaFin.aspx">
+            <siteMapNode title="Detalle Indicador Fin" description="Detalle Indicador Fin" url="~/DetalleIndicadorFin.aspx"></siteMapNode>
+          </siteMapNode>
+        </siteMapNode>
+        <siteMapNode title="Fichas de Monitoreo" description="Fichas de Monitoreo" url="~/FichasMonitoreo.aspx"></siteMapNode>
+      </siteMapNode>
+
+      <siteMapNode title="Módulo SIPOL 19-24" description="Módulo SIPOL 19-24" url="~/MosaicoSectores19-24.aspx">
+
+        <siteMapNode title="Indicador Sectorial 19-24" description="Indicador Sectorial 19-24" url="~/IndicadorSectorial19-24.aspx" />
+        <siteMapNode title="Indicadores de Fin 19-24" description="Indicadores de Fin 19-24" url="~/MosaicoFin4T.aspx">
+          <siteMapNode title="Programas Fin 19-24" description="Programas Fin 19-24" url="~/ProgramaFin4T.aspx">
+            <siteMapNode title="Detalle Indicador Fin 19-24" description="Detalle Indicador Fin 19-24" url="~/DetalleIndicadorFin4T.aspx"></siteMapNode>
+          </siteMapNode>
+        </siteMapNode>
+        <siteMapNode title="Fichas de Monitoreo" description="Fichas de Monitoreo" url="~/FichasMonitoreo4T.aspx"></siteMapNode>
+      </siteMapNode>
+      
+    </siteMapNode>
+    <siteMapNode title="DescargaFT" description="DescargaFT" url="~/DescargarFTIndicador.aspx" />
+  </siteMapNode>
+</siteMap>

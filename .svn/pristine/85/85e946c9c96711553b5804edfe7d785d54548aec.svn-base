@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="mirDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="spMPAEM_Ciclos" ReturnType="Collection(mirDBModel.spMPAEM_Ciclos_Result)">
+      <Parameter Name="Anio" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="spMPAEM_HistoricoIndRep" ReturnType="Collection(mirDBModel.spMPAEM_HistoricoIndRep_Result)">
+      <Parameter Name="pIdIndicador" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="spMPAEM_ListaIndicadoresDetalle_net" ReturnType="Collection(mirDBModel.spMPAEM_ListaIndicadoresDetalle_net_Result)">
+      <Parameter Name="pIdIndicador" Mode="In" Type="Decimal" />
+      <Parameter Name="pNivel" Mode="In" Type="Decimal" />
+      <Parameter Name="pIdNivel" Mode="In" Type="Decimal" />
+      <Parameter Name="pIdMatriz" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="spMPAEM_Mosaicos_net" ReturnType="Collection(mirDBModel.spMPAEM_Mosaicos_net_Result)">
+      <Parameter Name="Anio" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="spMPAEM_VariablesIndicador" ReturnType="Collection(mirDBModel.spMPAEM_VariablesIndicador_Result)">
+      <Parameter Name="pIdIndicador" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="spMPAEM_Parametro" ReturnType="Collection(mirDBModel.spMPAEM_Parametro_Result)">
+      <Parameter Name="Parametro" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="spMPAEM_SupuestosNivel" ReturnType="Collection(mirDBModel.spMPAEM_SupuestosNivel_Result)">
+      <Parameter Name="pIdMatriz" Mode="In" Type="Decimal" />
+      <Parameter Name="pNivel" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spMPAEM_Presupuestos" ReturnType="Collection(mirDBModel.spMPAEM_Presupuestos_Result)">
+      <Parameter Name="Ramo" Mode="In" Type="String" />
+      <Parameter Name="Modalidad" Mode="In" Type="String" />
+      <Parameter Name="palabraClave" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="spMPAEM_ObjetivosPorNivel_net" ReturnType="Collection(mirDBModel.spMPAEM_ObjetivosPorNivel_net_Result)">
+      <Parameter Name="pIdMatriz" Mode="In" Type="Decimal" />
+      <Parameter Name="pNivel" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="spMPAEM_BuscaIndicador_net" ReturnType="Collection(mirDBModel.spMPAEM_BuscaIndicador_net_Result)">
+      <Parameter Name="Texto" Mode="In" Type="String" />
+      <Parameter Name="Derecho" Mode="In" Type="Int16" />
+    </FunctionImport>
+    <FunctionImport Name="spMPAEM_Programas_net" ReturnType="Collection(mirDBModel.spMPAEM_Programas_net_Result)">
+      <Parameter Name="Anio" Mode="In" Type="Decimal" />
+      <Parameter Name="Ramo" Mode="In" Type="String" />
+      <Parameter Name="Unidad" Mode="In" Type="String" />
+      <Parameter Name="palabraClave" Mode="In" Type="String" />
+      <Parameter Name="pIdMatriz" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="spMPAEM_Valoraciones" ReturnType="Collection(mirDBModel.spMPAEM_Valoraciones_Result)">
+      <Parameter Name="palabraClave" Mode="In" Type="String" />
+      <Parameter Name="Ramo" Mode="In" Type="Int32" />
+      <Parameter Name="Modalidad" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="v_TotMir" EntityType="mirDBModel.v_TotMir" />
+    <EntitySet Name="TC_PROG_SECTORIALES" EntityType="mirDBModel.TC_PROG_SECTORIALES" />
+  </EntityContainer>
+  <ComplexType Name="spMPAEM_Ciclos_Result">
+    <Property Type="String" Name="CICLO_VALUE" Nullable="true" MaxLength="4" />
+    <Property Type="Int16" Name="CICLO_ID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="spMPAEM_HistoricoIndRep_Result">
+    <Property Type="Int64" Name="NO" Nullable="true" />
+    <Property Type="String" Name="ANIO" Nullable="false" MaxLength="4" />
+    <Property Type="String" Name="META_PLANEADA" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="META_ALCANZADA" Nullable="true" MaxLength="25" />
+    <Property Type="Boolean" Name="RELATIVA" Nullable="false" />
+    <Property Type="Boolean" Name="ABSOLUTA" Nullable="false" />
+    <Property Type="Decimal" Name="META_ABS_PLANEADA" Nullable="true" Precision="32" Scale="16" />
+    <Property Type="Decimal" Name="META_ABS_ALCANZADA" Nullable="true" Precision="32" Scale="16" />
+    <Property Type="Decimal" Name="META_REL_PLANEADA" Nullable="true" Precision="32" Scale="16" />
+    <Property Type="Decimal" Name="META_REL_ALCANZADA" Nullable="true" Precision="32" Scale="16" />
+  </ComplexType>
+  <ComplexType Name="spMPAEM_ListaIndicadoresDetalle_net_Result">
+    <Property Type="Int64" Name="ID" Nullable="true" />
+    <Property Type="Int32" Name="ID_MATRIZ" Nullable="false" />
+    <Property Type="String" Name="NOMBRE_MATRIZ" Nullable="true" MaxLength="2000" />
+    <Property Type="String" Name="DESC_NIVEL" Nullable="true" />
+    <Property Type="String" Name="NOMBRE_IND" Nullable="true" MaxLength="1000" />
+    <Property Type="String" Name="DEFINICION_IND" Nullable="true" MaxLength="2000" />
+    <Property Type="String" Name="METODO_CALCULO_IND" Nullable="true" MaxLength="2000" />
+    <Property Type="String" Name="FRECUENCIA_MEDICION" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="UNIDAD_MEDIDA" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="META_ABS_PLANEADA" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="META_ABS_ALCANZADA" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="META_REL_PLANEADA" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="META_REL_ALCANZADA" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="LINEA_BASE" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="TIPO_RELATIVO" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="SENTIDO_INDICADOR" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="DESC_DIMENSION" Nullable="true" MaxLength="500" />
+    <Property Type="Int16" Name="CICLO_LINEA_BASE" Nullable="true" />
+    <Property Type="Int32" Name="ID_NIVEL" Nullable="true" />
+    <Property Type="Int32" Name="ID_INDICADOR" Nullable="false" />
+    <Property Type="Int32" Name="NIVEL" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="spMPAEM_Mosaicos_net_Result">
+    <Property Type="String" Name="NOM_ARCHIVO" Nullable="true" MaxLength="115" />
+    <Property Type="Int32" Name="LVL" Nullable="false" />
+    <Property Type="String" Name="CICLO" Nullable="true" MaxLength="4" />
+    <Property Type="String" Name="RAMO" Nullable="true" MaxLength="2" />
+    <Property Type="String" Name="UNIDAD" Nullable="false" MaxLength="3" />
+  </ComplexType>
+  <ComplexType Name="spMPAEM_Programas_net_Result">
+    <Property Type="String" Name="PP" Nullable="true" MaxLength="4" />
+    <Property Type="String" Name="NOMBRE" Nullable="true" MaxLength="2000" />
+    <Property Type="Int32" Name="ID_MATRIZ" Nullable="false" />
+    <Property Type="String" Name="UNIDAD" Nullable="false" MaxLength="3" />
+    <Property Type="Int16" Name="CICLO" Nullable="false" />
+    <Property Type="String" Name="SIGLAS_UNIDAD" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="SIGLAS_DEP" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="DESC_APROBACION_DICTAMEN" Nullable="true" MaxLength="40" />
+    <Property Type="String" Name="OBJETIVO_ESTRATEGICO" Nullable="true" />
+    <Property Type="String" Name="OBJETIVO_NACIONAL" Nullable="true" />
+    <Property Type="String" Name="DESC_UNIDAD" Nullable="false" />
+    <Property Type="String" Name="DESC_META" Nullable="false" />
+    <Property Type="String" Name="DESC_PROGRAMA_SEC_INST" Nullable="false" />
+    <Property Type="String" Name="NOMBRE_MATRIZ" Nullable="false" />
+    <Property Type="String" Name="MODALIDAD" Nullable="false" />
+    <Property Type="Int32" Name="CLAVE" Nullable="false" />
+    <Property Type="Byte" Name="ID_NIVEL_APROBACION" Nullable="true" />
+    <Property Type="Int32" Name="RAMO_DEP" Nullable="false" />
+    <Property Type="String" Name="DEPENDENCIA" Nullable="false" />
+    <Property Type="String" Name="OBJ_EST_DEP_ENT" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="spMPAEM_VariablesIndicador_Result">
+    <Property Type="String" Name="NOMBRE" Nullable="true" />
+    <Property Type="String" Name="DESC_VARIABLE" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="DESC_MEDIO_VERIFICACION" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="spMPAEM_Parametro_Result">
+    <Property Type="String" Name="VALOR" Nullable="false" MaxLength="200" />
+  </ComplexType>
+  <ComplexType Name="spMPAEM_Presupuestos_Result">
+    <Property Type="Int16" Name="CICLO" Nullable="false" />
+    <Property Type="Decimal" Name="IMPORTE_ORIGINAL_MDP" Nullable="true" Precision="32" Scale="2" />
+    <Property Type="Decimal" Name="IMPORTE_EJERCIDO_MDP" Nullable="true" Precision="32" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="spMPAEM_SupuestosNivel_Result">
+    <Property Type="String" Name="DESC_SUPUESTO" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="spMPAEM_ObjetivosPorNivel_net_Result">
+    <Property Type="Int64" Name="ID" Nullable="true" />
+    <Property Type="String" Name="DESC_NIVEL" Nullable="true" />
+    <Property Type="Int32" Name="ID_NIVEL" Nullable="false" />
+    <Property Type="Int32" Name="ID_PARENT" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="spMPAEM_BuscaIndicador_net_Result">
+    <Property Type="String" Name="NOMBRE" Nullable="true" MaxLength="1000" />
+    <Property Type="String" Name="DEFINICION_IND" Nullable="true" MaxLength="2000" />
+    <Property Type="Int16" Name="CICLO" Nullable="true" />
+    <Property Type="Int32" Name="ID_INDICADOR" Nullable="false" />
+    <Property Type="Int32" Name="NIVEL" Nullable="true" />
+    <Property Type="Int32" Name="ID_NIVEL" Nullable="true" />
+    <Property Type="Int32" Name="ID_MATRIZ" Nullable="false" />
+    <Property Type="Int32" Name="RAMO" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="spMPAEM_Valoraciones_Result">
+    <Property Type="Int16" Name="CICLO" Nullable="true" />
+    <Property Type="Int32" Name="CALIF_DIS" Nullable="true" />
+    <Property Type="Int32" Name="CALIF_TOT" Nullable="true" />
+    <Property Type="Int32" Name="CALIF_IND" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="v_TotMir">
+    <Key>
+      <PropertyRef Name="CICLO" />
+    </Key>
+    <Property Name="NO" Type="Int64" />
+    <Property Name="CICLO" Type="Int16" Nullable="false" />
+    <Property Name="RESULTADOS" Type="Int32" />
+    <Property Name="GESTION" Type="Int32" />
+    <Property Name="SERVICIO" Type="Int32" />
+    <Property Name="TOTAL" Type="Int32" />
+    <Property Name="TotalIndicadores" Type="String" MaxLength="54" FixedLength="false" Unicode="false" />
+    <Property Name="TotalClasificados" Type="String" MaxLength="98" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="TC_PROG_SECTORIALES">
+    <Key>
+      <PropertyRef Name="ID_PROG_SECTORIAL" />
+    </Key>
+    <Property Name="ID_PROG_SECTORIAL" Type="Int32" Nullable="false" />
+    <Property Name="CLASIFICACION" Type="Int32" Nullable="false" />
+    <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="URL_ICONO" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

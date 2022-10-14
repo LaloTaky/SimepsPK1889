@@ -1,0 +1,44 @@
+﻿using SIMEPS.Dal;
+using SIMEPS.Modelo;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace SIMEPS
+{
+    public partial class HomeRamo33 : System.Web.UI.Page
+    {
+        public String valorT = "";
+        public int iCiclo = DateTime.Now.Year;
+        FondoRamo33[] fondos = null;
+
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            IndicadoresDal simeps = new IndicadoresDal();
+            
+
+            if (Request.Params["pCiclo"] != null)
+            {
+                //odsMosaicos.SelectParameters["pCiclo"].DefaultValue = Request.Params["pCiclo"].ToString();
+                iCiclo = Convert.ToInt16(Request.Params["pCiclo"].ToString());
+                if (iCiclo == 2020 || iCiclo == 2021)
+                    NotaPie.Visible = true;
+            }
+            else
+            {
+                Response.Redirect(string.Format("HomeRamo33.aspx?pCiclo={0}", DateTime.Now.Year));
+            }
+
+            this.fondos = simeps.ConsultaFondosRamo33PorCiclo(iCiclo);
+            rprFondos.DataSource = this.fondos;
+            rprFondos.DataBind();
+
+            lblSubtitulo.Text = "¿Qué es el Ramo 33?";
+            lblCuerpo8.Text = "¡Consulta los indicadores del Ramo 33!";
+        }
+    }
+}

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="inventarioDBModelStoreContainer" CdmEntityContainer="inventarioDBEntities">
+    <FunctionImportMapping FunctionImportName="spFiltrosFederales" FunctionName="inventarioDBModel.Store.spFiltrosFederales">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="inventarioDBModel.spFiltrosFederales_Result">
+          <ScalarProperty Name="DER_ID_I" ColumnName="DER_ID_I" />
+          <ScalarProperty Name="DER_DESCRIPCION_I" ColumnName="DER_DESCRIPCION_I" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="mirDBModelStoreContainer" CdmEntityContainer="Entities">
+    <FunctionImportMapping FunctionImportName="spMPAEM_Ciclos" FunctionName="mirDBModel.Store.spMPAEM_Ciclos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="mirDBModel.spMPAEM_Ciclos_Result">
+          <ScalarProperty Name="CICLO_VALUE" ColumnName="CICLO_VALUE" />
+          <ScalarProperty Name="CICLO_ID" ColumnName="CICLO_ID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spMPAEM_HistoricoIndRep" FunctionName="mirDBModel.Store.spMPAEM_HistoricoIndRep">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="mirDBModel.spMPAEM_HistoricoIndRep_Result">
+          <ScalarProperty Name="NO" ColumnName="NO" />
+          <ScalarProperty Name="ANIO" ColumnName="ANIO" />
+          <ScalarProperty Name="META_PLANEADA" ColumnName="META_PLANEADA" />
+          <ScalarProperty Name="META_ALCANZADA" ColumnName="META_ALCANZADA" />
+          <ScalarProperty Name="RELATIVA" ColumnName="RELATIVA" />
+          <ScalarProperty Name="ABSOLUTA" ColumnName="ABSOLUTA" />
+          <ScalarProperty Name="META_ABS_PLANEADA" ColumnName="META_ABS_PLANEADA" />
+          <ScalarProperty Name="META_ABS_ALCANZADA" ColumnName="META_ABS_ALCANZADA" />
+          <ScalarProperty Name="META_REL_PLANEADA" ColumnName="META_REL_PLANEADA" />
+          <ScalarProperty Name="META_REL_ALCANZADA" ColumnName="META_REL_ALCANZADA" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spMPAEM_ListaIndicadoresDetalle_net" FunctionName="mirDBModel.Store.spMPAEM_ListaIndicadoresDetalle_net">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="mirDBModel.spMPAEM_ListaIndicadoresDetalle_net_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ID_MATRIZ" ColumnName="ID_MATRIZ" />
+          <ScalarProperty Name="NOMBRE_MATRIZ" ColumnName="NOMBRE_MATRIZ" />
+          <ScalarProperty Name="DESC_NIVEL" ColumnName="DESC_NIVEL" />
+          <ScalarProperty Name="NOMBRE_IND" ColumnName="NOMBRE_IND" />
+          <ScalarProperty Name="DEFINICION_IND" ColumnName="DEFINICION_IND" />
+          <ScalarProperty Name="METODO_CALCULO_IND" ColumnName="METODO_CALCULO_IND" />
+          <ScalarProperty Name="FRECUENCIA_MEDICION" ColumnName="FRECUENCIA_MEDICION" />
+          <ScalarProperty Name="UNIDAD_MEDIDA" ColumnName="UNIDAD_MEDIDA" />
+          <ScalarProperty Name="META_ABS_PLANEADA" ColumnName="META_ABS_PLANEADA" />
+          <ScalarProperty Name="META_ABS_ALCANZADA" ColumnName="META_ABS_ALCANZADA" />
+          <ScalarProperty Name="META_REL_PLANEADA" ColumnName="META_REL_PLANEADA" />
+          <ScalarProperty Name="META_REL_ALCANZADA" ColumnName="META_REL_ALCANZADA" />
+          <ScalarProperty Name="LINEA_BASE" ColumnName="LINEA_BASE" />
+          <ScalarProperty Name="TIPO_RELATIVO" ColumnName="TIPO_RELATIVO" />
+          <ScalarProperty Name="SENTIDO_INDICADOR" ColumnName="SENTIDO_INDICADOR" />
+          <ScalarProperty Name="DESC_DIMENSION" ColumnName="DESC_DIMENSION" />
+          <ScalarProperty Name="CICLO_LINEA_BASE" ColumnName="CICLO_LINEA_BASE" />
+          <ScalarProperty Name="ID_NIVEL" ColumnName="ID_NIVEL" />
+          <ScalarProperty Name="ID_INDICADOR" ColumnName="ID_INDICADOR" />
+          <ScalarProperty Name="NIVEL" ColumnName="NIVEL" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spMPAEM_Mosaicos_net" FunctionName="mirDBModel.Store.spMPAEM_Mosaicos_net">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="mirDBModel.spMPAEM_Mosaicos_net_Result">
+          <ScalarProperty Name="NOM_ARCHIVO" ColumnName="NOM_ARCHIVO" />
+          <ScalarProperty Name="LVL" ColumnName="LVL" />
+          <ScalarProperty Name="CICLO" ColumnName="CICLO" />
+          <ScalarProperty Name="RAMO" ColumnName="RAMO" />
+          <ScalarProperty Name="UNIDAD" ColumnName="UNIDAD" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spMPAEM_VariablesIndicador" FunctionName="mirDBModel.Store.spMPAEM_VariablesIndicador">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="mirDBModel.spMPAEM_VariablesIndicador_Result">
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="DESC_VARIABLE" ColumnName="DESC_VARIABLE" />
+          <ScalarProperty Name="DESC_MEDIO_VERIFICACION" ColumnName="DESC_MEDIO_VERIFICACION" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spMPAEM_Presupuestos" FunctionName="mirDBModel.Store.spMPAEM_Presupuestos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="mirDBModel.spMPAEM_Presupuestos_Result">
+          <ScalarProperty Name="CICLO" ColumnName="CICLO" />
+          <ScalarProperty Name="IMPORTE_ORIGINAL_MDP" ColumnName="IMPORTE_ORIGINAL_MDP" />
+          <ScalarProperty Name="IMPORTE_EJERCIDO_MDP" ColumnName="IMPORTE_EJERCIDO_MDP" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spMPAEM_Programas_net" FunctionName="mirDBModel.Store.spMPAEM_Programas_net">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="mirDBModel.spMPAEM_Programas_net_Result">
+          <ScalarProperty Name="PP" ColumnName="PP" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="ID_MATRIZ" ColumnName="ID_MATRIZ" />
+          <ScalarProperty Name="UNIDAD" ColumnName="UNIDAD" />
+          <ScalarProperty Name="CICLO" ColumnName="CICLO" />
+          <ScalarProperty Name="SIGLAS_UNIDAD" ColumnName="SIGLAS_UNIDAD" />
+          <ScalarProperty Name="SIGLAS_DEP" ColumnName="SIGLAS_DEP" />
+          <ScalarProperty Name="DESC_APROBACION_DICTAMEN" ColumnName="DESC_APROBACION_DICTAMEN" />
+          <ScalarProperty Name="OBJETIVO_ESTRATEGICO" ColumnName="OBJETIVO_ESTRATEGICO" />
+          <ScalarProperty Name="OBJETIVO_NACIONAL" ColumnName="OBJETIVO_NACIONAL" />
+          <ScalarProperty Name="DESC_UNIDAD" ColumnName="DESC_UNIDAD" />
+          <ScalarProperty Name="DESC_META" ColumnName="DESC_META" />
+          <ScalarProperty Name="DESC_PROGRAMA_SEC_INST" ColumnName="DESC_PROGRAMA_SEC_INST" />
+          <ScalarProperty Name="NOMBRE_MATRIZ" ColumnName="NOMBRE_MATRIZ" />
+          <ScalarProperty Name="MODALIDAD" ColumnName="MODALIDAD" />
+          <ScalarProperty Name="CLAVE" ColumnName="CLAVE" />
+          <ScalarProperty Name="ID_NIVEL_APROBACION" ColumnName="ID_NIVEL_APROBACION" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spMPAEM_Valoraciones" FunctionName="mirDBModel.Store.spMPAEM_Valoraciones">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="mirDBModel.spMPAEM_Valoraciones_Result">
+          <ScalarProperty Name="CICLO" ColumnName="CICLO" />
+          <ScalarProperty Name="CALIF_DIS" ColumnName="CALIF_DIS" />
+          <ScalarProperty Name="CALIF_TOT" ColumnName="CALIF_TOT" />
+          <ScalarProperty Name="CALIF_IND" ColumnName="CALIF_IND" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spMPAEM_ObjetivosPorNivel_net" FunctionName="mirDBModel.Store.spMPAEM_ObjetivosPorNivel_net">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="mirDBModel.spMPAEM_ObjetivosPorNivel_net_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="DESC_NIVEL" ColumnName="DESC_NIVEL" />
+          <ScalarProperty Name="ID_NIVEL" ColumnName="ID_NIVEL" />
+          <ScalarProperty Name="ID_PARENT" ColumnName="ID_PARENT" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spMPAEM_SupuestosNivel" FunctionName="mirDBModel.Store.spMPAEM_SupuestosNivel">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="mirDBModel.spMPAEM_SupuestosNivel_Result">
+          <ScalarProperty Name="DESC_SUPUESTO" ColumnName="DESC_SUPUESTO" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spMPAEM_BuscaIndicador_net" FunctionName="mirDBModel.Store.spMPAEM_BuscaIndicador_net">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="mirDBModel.spMPAEM_BuscaIndicador_net_Result">
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="DEFINICION_IND" ColumnName="DEFINICION_IND" />
+          <ScalarProperty Name="CICLO" ColumnName="CICLO" />
+          <ScalarProperty Name="ID_INDICADOR" ColumnName="ID_INDICADOR" />
+          <ScalarProperty Name="NIVEL" ColumnName="NIVEL" />
+          <ScalarProperty Name="ID_NIVEL" ColumnName="ID_NIVEL" />
+          <ScalarProperty Name="ID_MATRIZ" ColumnName="ID_MATRIZ" />
+          <ScalarProperty Name="RAMO" ColumnName="RAMO" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spMPAEM_Parametro" FunctionName="mirDBModel.Store.spMPAEM_Parametro">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="mirDBModel.spMPAEM_Parametro_Result">
+          <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="v_TotMir">
+      <EntityTypeMapping TypeName="mirDBModel.v_TotMir">
+        <MappingFragment StoreEntitySet="v_TotMir">
+          <ScalarProperty Name="TotalClasificados" ColumnName="TotalClasificados" />
+          <ScalarProperty Name="TotalIndicadores" ColumnName="TotalIndicadores" />
+          <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+          <ScalarProperty Name="SERVICIO" ColumnName="SERVICIO" />
+          <ScalarProperty Name="GESTION" ColumnName="GESTION" />
+          <ScalarProperty Name="RESULTADOS" ColumnName="RESULTADOS" />
+          <ScalarProperty Name="CICLO" ColumnName="CICLO" />
+          <ScalarProperty Name="NO" ColumnName="NO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TC_PROG_SECTORIALES">
+      <EntityTypeMapping TypeName="mirDBModel.TC_PROG_SECTORIALES">
+        <MappingFragment StoreEntitySet="TC_PROG_SECTORIALES">
+          <ScalarProperty Name="URL_ICONO" ColumnName="URL_ICONO" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="CLASIFICACION" ColumnName="CLASIFICACION" />
+          <ScalarProperty Name="ID_PROG_SECTORIAL" ColumnName="ID_PROG_SECTORIAL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

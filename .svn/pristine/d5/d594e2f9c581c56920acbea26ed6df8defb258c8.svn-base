@@ -1,0 +1,57 @@
+﻿<%@ Page Language="C#" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="Programas.aspx.cs" Inherits="SIMEPS.Programas" %>
+<asp:Content ID="BodyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server"> 
+    <div class="borderedFrame">  
+        <div id="divContentProgramas">
+            <table style="padding-left:10px">
+                <tr>
+                    <td>
+                        <div id="divProgramas">
+                            <asp:GridView ID="grvPrograma" runat="server" AutoGenerateColumns="false" ShowHeader="true" DataSourceID="odsProgramas" style="width:100%" AllowPaging="true" PageSize="30" CssClass="tabla">
+                                <columns>                                            
+                                    <asp:boundfield datafield="PP" headertext="PP" itemstyle-width="10%" itemstyle-cssclass="tablaColumnaCenter" headerstyle-cssclass="EncabezadoProgramas" />
+                                    <asp:templatefield itemstyle-width="84%" headertext="Nombre del Programa" itemstyle-cssclass="tablaColumna" headerstyle-cssclass="EncabezadoProgramas">																				
+                                        <itemtemplate>	
+                                            <a id="aPrograma" runat="server" style="color:#1b4093" href='<%#Eval("LIGA") %>' onclick="fjsDetenerEvento(event);mostrarPrograma(this);" class="LigaPrograma">
+                                                <asp:Label ID="lblPrograma" runat="server" Text='<%#Eval("NOMBRE") %>'></asp:Label>
+                                            </a>
+                                        </itemtemplate>
+                                    </asp:templatefield>
+                                </columns>
+                                <rowstyle cssclass="tablaRenglon" />
+                                <pagerstyle cssclass="PaginacionProgramas"/>
+                                <alternatingrowstyle backcolor="#e1e1e1" />
+                            </asp:GridView>
+
+                            <asp:ObjectDataSource ID="odsProgramas" runat="server" TypeName="SIMEPS.Dal.IndicadoresDal" SelectMethod="ConsultarPrograma" >
+                                <selectparameters>
+                                    <asp:querystringparameter name="Anio" querystringfield="ciclo" type="Decimal" defaultvalue="0" />
+                                    <asp:querystringparameter name="Ramo" querystringfield="ramo" defaultvalue="0" />
+                                    <asp:querystringparameter name="Unidad" querystringfield="unidad" defaultvalue="0" />
+                                    <asp:querystringparameter name="palabraClave" defaultvalue="0"/>  
+                                    <asp:querystringparameter name="dMatriz" querystringfield="dMatriz" defaultvalue="-1" />
+                                    <asp:querystringparameter name="dIndicador" querystringfield="sIndicador" defaultvalue="0" />
+                                    <asp:querystringparameter name="sNivel" querystringfield="sNivel" defaultvalue="0" />                        
+                                    <asp:querystringparameter name="sPantalla" querystringfield="t" />                        
+                                </selectparameters>
+                            </asp:ObjectDataSource>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="infoPrograma">
+                            La información sobre las Matrices de 
+                            Indicadores para Resultados y de los 
+                            indicadores es responsabilidad de las 
+                            dependencias, entidades y los programas 
+                            federales correspondientes. Para mayor 
+                            información sobre los contenidos de la MIR y 
+                            sus indicadores se sugiere solicitarla 
+                            directamente al programa correspondiente.
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>    
+</asp:Content>
